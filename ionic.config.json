@@ -1,0 +1,7 @@
+{
+  "name": "historyFront",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

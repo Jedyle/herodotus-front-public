@@ -1,8 +1,13 @@
-import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonSplitPane, IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 import Menu from './components/Menu';
 import Page from './pages/Page';
+import ExplorePeriods from './pages/explore/periods';
+import ExploreCategories from './pages/explore/categories';
+import ExploreLessons from './pages/explore/lessons';
+import LessonDisplay from './pages/explore/lessonDisplay';
+import Profile from './pages/profile';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -31,10 +36,22 @@ const App: React.FC = () => {
           <Menu />
           <IonRouterOutlet id="main">
             <Route path="/" exact={true}>
-              <Redirect to="/page/Inbox" />
+              <Redirect to="/page/explore" />
             </Route>
-            <Route path="/page/:name" exact={true}>
-              <Page />
+            <Route path="/page/explore" exact={true}>
+	      <Page name="Periods" content={<ExplorePeriods/>}/>
+            </Route>
+            <Route path="/page/explore/periods/:periodSlug/categories" exact={true}>
+	      <Page name="Categories" content={<ExploreCategories/>} />	      
+	    </Route>
+            <Route path="/page/explore/periods/:periodSlug/categories/:categorySlug/lessons" exact={true}>
+	      <Page name="Lessons" content={<ExploreLessons/>} />	      
+	    </Route>
+            <Route path="/page/explore/periods/:periodSlug/categories/:categorySlug/lessons/:lessonSlug" exact={true}>
+	      <Page name="Lesson" content={<LessonDisplay/>} />	      
+	    </Route>	    	    
+            <Route path="/page/profile" exact={true}>
+	      <Page name="Profile" content={<Profile/>}/>
             </Route>
           </IonRouterOutlet>
         </IonSplitPane>

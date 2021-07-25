@@ -18,7 +18,7 @@ const LessonDisplay: React.FC =  () => {
   })
   
   return (
-    <div>
+    <div style={{margin: "20px"}}>
       <h1>{lesson?.name}</h1>
 
       <div dangerouslySetInnerHTML={{__html: lesson.article}} ></div>      

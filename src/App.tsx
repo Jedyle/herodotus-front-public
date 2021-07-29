@@ -28,6 +28,8 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+import Question from './components/questions';
+
 const App: React.FC = () => {
   return (
     <IonApp>
@@ -53,6 +55,26 @@ const App: React.FC = () => {
             <Route path="/page/profile" exact={true}>
 	      <Page name="Profile" content={<Profile/>}/>
             </Route>
+	    <Route path="/page/question" exact={true}>
+	      <Page name="Question" content={
+		<Question question={{
+		  "id": 4,
+		  "question": "Who was Ceasar's adoptive son ?",
+		  "answer_type": "choice",
+		  "answer_choices": [
+		    "Gaius",
+		    "Octavian",
+		    "Cicero"
+		  ],
+		  "answer": "1",
+		  "answer_details": "",
+		  "level": "easy",
+		  "photo": "http://localhost:8000/media/questions/HeritageImagesGettyImages-5c556c0846e0fb0001c08966.jpg",
+		  "lesson": 1		  
+		}} />
+	      } />
+	      
+	    </Route>
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>

@@ -43,8 +43,8 @@ const Menu: React.FC = () => {
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>Inboxe</IonListHeader>
-          <IonNote>hi@ionicframework.com</IonNote>
+          <IonListHeader>History App</IonListHeader>
+          <IonNote>Learn history, daily.</IonNote>
           {appPages.map((appPage, index) => {
             return (
               <IonMenuToggle key={index} autoHide={false}>

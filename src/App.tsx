@@ -55,8 +55,8 @@ const App: React.FC = () => {
             <Route path="/page/profile" exact={true}>
 	      <Page name="Profile" content={<Profile/>}/>
             </Route>
-	    <Route path="/page/question" exact={true}>
-	      <Page name="Question" content={
+	    <Route path="/page/question1" exact={true}>
+	      <Page name="Question 1" content={
 		<Question question={{
 		  "id": 4,
 		  "question": "Who was Ceasar's adoptive son ?",
@@ -67,14 +67,44 @@ const App: React.FC = () => {
 		    "Cicero"
 		  ],
 		  "answer": "1",
-		  "answer_details": "",
+		  "answer_details": "<p>Sacré César !!!</p>",
 		  "level": "easy",
 		  "photo": "http://localhost:8000/media/questions/HeritageImagesGettyImages-5c556c0846e0fb0001c08966.jpg",
 		  "lesson": 1		  
 		}} />
-	      } />
-	      
+	      } />	 
 	    </Route>
+	    <Route path="/page/question2" exact={true}>
+	      <Page name="Question 2" content={
+		<Question question={{
+		  "id": 4,
+		  "question": "When was Rome mythically founded ?",
+		  "answer_type": "number",
+		  "answer_choices": null,
+		  "answer": "-753",
+		  "answer_details": "<p>Romulus & Remus</p>",
+		  "level": "easy",
+		  "photo": "http://localhost:8000/media/questions/romulus_lupa.jpeg",
+		  "lesson": 1		  
+		}} />
+	      } />	 
+	    </Route>
+	    <Route path="/page/question3" exact={true}>
+	      <Page name="Question 3" content={
+		<Question question={{
+		  "id": 17,
+		  "question": "What is the name of the Gallic commander who Julius Ceasar defeated ?",
+		  "answer_type": "text",
+		  "answer_choices": null,
+		  "answer": "Vercingetorix",
+		  "answer_details": "<p>Nos ancêtres les gaulois</p>",
+		  "level": "medium",
+		  "photo": "http://localhost:8000/media/questions/vercing.jpeg",
+		  "lesson": 1
+		  
+		}} />
+	      } />	 
+	    </Route>	    	    
           </IonRouterOutlet>
         </IonSplitPane>
       </IonReactRouter>

@@ -1,13 +1,20 @@
 import { useState } from 'react';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonButton } from '@ionic/react';
-import MultipleChoiceQuestion, {isChoiceCorrect} from './multipleChoice';
+import MultipleChoiceQuestion from './types/multipleChoice';
+import NumberQuestion from './types/number';
+import TextQuestion from './types/text';
 
-import { QuestionProps, QuestionBodyProps } from './props';
+import { QuestionProps } from './props';
 
 const questionTypesMapping : any = {
   choice: {
     bodyComponent: MultipleChoiceQuestion,
-    isCorrectFunction: isChoiceCorrect
+  },
+  number: {
+    bodyComponent: NumberQuestion,
+  },
+  text: {
+    bodyComponent: TextQuestion
   }
 }
 const Question: React.FC<QuestionProps> = ({question}) => {
@@ -16,7 +23,6 @@ const Question: React.FC<QuestionProps> = ({question}) => {
   const [isValidated, setIsValidated] = useState<boolean>(false);
 
   const BodyComponent = questionTypesMapping[question.answer_type].bodyComponent;
-  const isCorrect = questionTypesMapping[question.answer_type].isCorrectFunction;
   
   return (
     <IonCard>
@@ -33,9 +39,14 @@ const Question: React.FC<QuestionProps> = ({question}) => {
 	setUserAnswer={setUserAnswer}
 	isValidated={isValidated}
 	/>
-	{isValidated ? (
-	  isCorrect(userAnswer, question.answer) ? <p><IonText color="success">Correct !</IonText></p> : <p><IonText color="danger">Incorrect !</IonText></p>
-	) : ""}	
+
+	{isValidated && (
+	  <p className="ion-text-center">
+	    <div dangerouslySetInnerHTML={{__html: question.answer_details}}></div>
+	    <br/>
+	  </p>
+	)}
+	
 	{!isValidated ? (
 	  userAnswer !== null ?
 	  (
@@ -46,7 +57,7 @@ const Question: React.FC<QuestionProps> = ({question}) => {
 	    >VALIDATE</IonButton>
 	  ) : ""
 	) : <IonButton color="light" expand="block">Next</IonButton>
-	}
+	}	
       </IonCardContent>
     </IonCard>
   );

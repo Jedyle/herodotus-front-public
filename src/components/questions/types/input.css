@@ -1,0 +1,23 @@
+ion-item.success {
+  border: 1px solid var(--ion-color-success);
+  background-color: var(--ion-color-light);
+  color: black;
+}
+
+ion-item.danger {
+  border: 1px solid var(--ion-color-danger);
+  background-color: var(--ion-color-light);
+  color: black;
+}
+
+ion-icon {
+  margin-right: 10px
+}
+
+ion-icon.success {
+  color: var(--ion-color-success);
+}
+
+ion-icon.danger {
+  color: var(--ion-color-danger);
+}

@@ -1,28 +1,22 @@
 import { useState } from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonList, IonItem, IonLabel, IonButton } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonButton } from '@ionic/react';
+import MultipleChoiceQuestion, {isChoiceCorrect} from './multipleChoice';
 
-interface QuestionInterface {
-  id: number;
-  question: string;
-  answer_type: string;
-  answer_choices: string[];
-  answer: string;
-  answer_details: string;
-  level: string;
-  photo: string;
-  lesson: number;
+import { QuestionProps, QuestionBodyProps } from './props';
+
+const questionTypesMapping : any = {
+  choice: {
+    bodyComponent: MultipleChoiceQuestion,
+    isCorrectFunction: isChoiceCorrect
+  }
 }
-
-interface QuestionProps {
-  question: QuestionInterface
-}
-
 const Question: React.FC<QuestionProps> = ({question}) => {
 
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [userAnswer, setUserAnswer] = useState<any>(null);
   const [isValidated, setIsValidated] = useState<boolean>(false);
 
-  const answer = parseInt(question.answer)
+  const BodyComponent = questionTypesMapping[question.answer_type].bodyComponent;
+  const isCorrect = questionTypesMapping[question.answer_type].isCorrectFunction;
   
   return (
     <IonCard>
@@ -33,30 +27,22 @@ const Question: React.FC<QuestionProps> = ({question}) => {
 	</IonCardTitle>
       </IonCardHeader>
       <IonCardContent>
-	<IonList>
-	  {question.answer_choices.map((choice: string, index: number) => (
-	    <IonItem
-	      button={!isValidated}
-	      onClick={() => {if (!isValidated){setSelectedAnswer(index);}}}
-	      color={isValidated ? (
-		answer == index ? "success"
-		: selectedAnswer == index && selectedAnswer !== answer ? "danger"
-		: ""
-	      ) : selectedAnswer == index ? "medium" : ""}
-	    >
-	      <IonLabel>
-		{choice}
-	      </IonLabel>
-	    </IonItem>
-	  ))}
-	</IonList>
+	<BodyComponent
+	question={question}
+	userAnswer={userAnswer}
+	setUserAnswer={setUserAnswer}
+	isValidated={isValidated}
+	/>
+	{isValidated ? (
+	  isCorrect(userAnswer, question.answer) ? <p><IonText color="success">Correct !</IonText></p> : <p><IonText color="danger">Incorrect !</IonText></p>
+	) : ""}	
 	{!isValidated ? (
-	  selectedAnswer !== null ?
+	  userAnswer !== null ?
 	  (
 	    <IonButton
 	      expand="block"
 	      color="secondary"
-	      onClick={() => {if (selectedAnswer !== null){setIsValidated(true)}}}
+	      onClick={() => {if (userAnswer !== null){setIsValidated(true)}}}
 	    >VALIDATE</IonButton>
 	  ) : ""
 	) : <IonButton color="light" expand="block">Next</IonButton>

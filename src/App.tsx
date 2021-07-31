@@ -8,6 +8,9 @@ import ExploreCategories from './pages/explore/categories';
 import ExploreLessons from './pages/explore/lessons';
 import LessonDisplay from './pages/explore/lessonDisplay';
 import Profile from './pages/profile';
+import ReviewLesson from './pages/review';
+import ReviewSession from './components/reviewSession';
+
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -51,10 +54,84 @@ const App: React.FC = () => {
 	    </Route>
             <Route path="/page/explore/periods/:periodSlug/categories/:categorySlug/lessons/:lessonSlug" exact={true}>
 	      <Page name="Lesson" content={<LessonDisplay/>} />	      
-	    </Route>	    	    
+	    </Route>
+            <Route path="/page/explore/periods/:periodSlug/categories/:categorySlug/lessons/:lessonSlug/questions" exact={true}>
+	      <ReviewLesson/>
+	    </Route>	    
             <Route path="/page/profile" exact={true}>
 	      <Page name="Profile" content={<Profile/>}/>
             </Route>
+	    <Route path="/page/session1" exact={true}>
+	      <Page
+		name="Revision 1"
+		content={
+		  <ReviewSession questions={
+		  [
+		    {
+		      "id": 17,
+		      "question": "What is the name of the Gallic commander who Julius Ceasar defeated ?",
+		      "answer_type": "text",
+		      "answer_choices": null,
+		      "answer": "Vercingetorix",
+		      "answer_details": "",
+		      "level": "medium",
+		      "photo": "http://localhost:8000/media/questions/vercing.jpeg",
+		      "lesson": 1
+		    },
+		    {
+		      "id": 4,
+		      "question": "Who was Ceasar's adoptive son ?",
+		      "answer_type": "choice",
+		      "answer_choices": [
+			"Gaius",
+			"Octavian",
+			"Cicero",
+			"Cato"
+		      ],
+		      "answer": "1",
+		      "answer_details": "",
+		      "level": "easy",
+		      "photo": "http://localhost:8000/media/questions/Augustus_Bevilacqua_Glyptothek_Munich_317.jpg",
+		      "lesson": 1
+		    },
+		    {
+		      "id": 3,
+		      "question": "Who was the first emperor of Rome ?",
+		      "answer_type": "text",
+		      "answer_choices": null,
+		      "answer": "Gaius Octavian Ceasar",
+		      "answer_details": "<p>Adoptive son of Gaius Julius Ceasar</p>",
+		      "level": "easy",
+		      "photo": "http://localhost:8000/media/questions/Augustus_Bevilacqua_Glyptothek_Munich_317_HoW7a8m.jpg",
+		      "lesson": 1
+		    },
+		    {
+		      "id": 2,
+		      "question": "When is the fall of the western Roman Empire ?",
+		      "answer_type": "number",
+		      "answer_choices": null,
+		      "answer": "476",
+		      "answer_details": "<p>Odoacre etc etc</p>",
+		      "level": "easy",
+		      "photo": "http://localhost:8000/media/questions/rome-chute.jpg",
+		      "lesson": 1
+		    },
+		    {
+		      "id": 1,
+		      "question": "What is the mythical date of the foundation of Rome ?",
+		      "answer_type": "number",
+		      "answer_choices": null,
+		      "answer": "-753",
+		      "answer_details": "<p>Romulus and Remus Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse turpis arcu, cursus in porttitor vel, tempor vel mi. Pellentesque eu magna a leo rhoncus hendrerit a ut nibh. Phasellus et massa vel dui lobortis pretium sit amet id mauris. Nulla ullamcorper pellentesque justo, ut tristique odio. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis justo ex, ultricies ac tellus ut, dignissim pretium tellus. Morbi ac tortor a lacus placerat egestas. </p>",
+		      "level": "easy",
+		      "photo": "http://localhost:8000/media/questions/romulus_lupa.jpeg",
+		      "lesson": 1
+		    }
+		  ]
+		  }/>
+		}
+	      />
+	    </Route>
 	    <Route path="/page/question1" exact={true}>
 	      <Page name="Question 1" content={
 		<Question question={{

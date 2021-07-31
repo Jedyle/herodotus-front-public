@@ -22,11 +22,6 @@ const Page: React.FC<PageInterface> = ({name, content}) => {
         </IonToolbar>
       </IonHeader>            
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">{name}</IonTitle>
-          </IonToolbar>
-        </IonHeader>
 	{content}
       </IonContent>
     </IonPage>

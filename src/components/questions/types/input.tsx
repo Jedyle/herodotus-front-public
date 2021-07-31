@@ -1,3 +1,5 @@
+import { useRef, useEffect } from 'react';
+
 import { QuestionBodyProps} from '../props';
 import { IonList, IonItem, IonInput, IonIcon, IonText } from '@ionic/react';
 
@@ -8,8 +10,13 @@ const InputQuestionFactory = (isCorrectFunction: (answer: any, expectedAnswer: a
 
   const InputQuestion: React.FC<QuestionBodyProps> = ({question, userAnswer, setUserAnswer, isValidated}) => {
 
+    const inputRef = useRef<any>(null);
     const isUserAnswerCorrect : boolean = userAnswer !== null && isCorrectFunction(userAnswer, question.answer);
 
+    useEffect(() => {
+      setTimeout(() => inputRef.current.setFocus(), 100);
+    })
+    
     return (
       <IonList>
 	<IonItem className={
@@ -37,6 +44,7 @@ const InputQuestionFactory = (isCorrectFunction: (answer: any, expectedAnswer: a
 	   )
 	  }
 	  <IonInput
+	    ref={(ref) => inputRef.current = ref}
 	    disabled={isValidated}
 	    value={userAnswer}
 	    placeholder="Enter Answer"

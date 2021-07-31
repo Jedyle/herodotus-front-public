@@ -18,7 +18,8 @@ interface QuestionBodyProps {
 }
 
 interface QuestionProps {
-  question: QuestionInterface
+  question: QuestionInterface;
+  onTriggerNextButton?: (isAnswerCorrect: boolean) => void;
 }
 
 export type {QuestionInterface, QuestionBodyProps, QuestionProps};

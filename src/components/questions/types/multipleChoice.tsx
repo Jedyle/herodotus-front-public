@@ -20,7 +20,7 @@ const MultipleChoiceQuestion: React.FC<QuestionBodyProps> = ({question, userAnsw
 	    : ""
 	  ) : isChoiceCorrect(userAnswer, index) ? "medium" : ""}
 	>
-	  <IonLabel>
+	  <IonLabel className="ion-text-wrap">
 	    {choice}
 	  </IonLabel>
 	</IonItem>

@@ -8,7 +8,11 @@ import ExploreCategories from './pages/explore/categories';
 import ExploreLessons from './pages/explore/lessons';
 import LessonDisplay from './pages/explore/lessonDisplay';
 import Profile from './pages/profile';
-import ReviewLesson from './pages/review';
+import ReviewLesson from './pages/review/lesson';
+import ReviewNewSession from './pages/review/newSession';
+
+
+// rm when app finished
 import ReviewSession from './components/reviewSession';
 
 
@@ -54,6 +58,9 @@ const App: React.FC = () => {
 	    </Route>
             <Route path="/page/explore/periods/:periodSlug/categories/:categorySlug/lessons/:lessonSlug" exact={true}>
 	      <Page name="Lesson" content={<LessonDisplay/>} />	      
+	    </Route>
+	    <Route path="/page/new_session" exact={true}>
+	      <ReviewNewSession />
 	    </Route>
             <Route path="/page/explore/periods/:periodSlug/categories/:categorySlug/lessons/:lessonSlug/questions" exact={true}>
 	      <ReviewLesson/>

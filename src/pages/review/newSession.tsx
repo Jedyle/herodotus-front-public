@@ -4,39 +4,29 @@ import { useIonViewWillEnter, useIonAlert, IonButtons, IonContent, IonHeader, Io
 
 import { useParams, useHistory } from 'react-router-dom';
 
-import { retrieveLesson, getQuestions, validateLesson } from '../../services/api';
+import { getNewReviewSession, validateSession } from '../../services/api';
 
 import ReviewSession from '../../components/reviewSession';
 
-interface LessonParams {
-  periodSlug: string;
-  categorySlug: string;
-  lessonSlug: string;
-}
+const ReviewNewSession: React.FC = () => {
 
-const ReviewLesson: React.FC<any> = () => {
-
-  const {periodSlug, categorySlug, lessonSlug} = useParams<LessonParams>();
-  const [lesson, setLesson] = useState({name: null, article: "", slug: ""});
   const [questions, setQuestions] = useState([]);
   const [present] = useIonAlert();
   const history = useHistory();
   
   useIonViewWillEnter(() => {
-    getQuestions(periodSlug, categorySlug, lessonSlug).then((response: any) => {
+    console.log("ENTER")
+    getNewReviewSession().then((response: any) => {
       setQuestions(response.data);
-    })
-    retrieveLesson(periodSlug, categorySlug, lessonSlug).then((response: any) => {
-      setLesson(response.data);
     })
   })
 
   const onReviewIsOver = () => {
-    validateLesson(lesson.slug).then(() => {
+    validateSession(questions.map((question) => (question.id))).then(() => {
       present({
-	message: "You have successfully validated this lesson!",
+	message: "You have successfully completed this session!",
 	buttons: [
-	  {text: "Continue", handler: (d) => history.push("/page/explore")}
+	  {text: "Continue", handler: () => history.push("/page/explore")}
 	]
       })
     })
@@ -49,7 +39,7 @@ const ReviewLesson: React.FC<any> = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>{lesson.name}</IonTitle>
+          <IonTitle>Review Time !</IonTitle>
 	  <IonButtons slot="end">
 	    <IonBackButton />
           </IonButtons>
@@ -69,4 +59,4 @@ const ReviewLesson: React.FC<any> = () => {
   );
 }
 
-export default ReviewLesson;
+export default ReviewNewSession;

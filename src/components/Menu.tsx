@@ -34,6 +34,12 @@ const appPages: AppPage[] = [
     iosIcon: personOutline,
     mdIcon: personSharp
   },
+  {
+    title: 'Review',
+    url: '/page/new_session',
+    iosIcon: personOutline,
+    mdIcon: personSharp
+  },  
 ];
 
 const Menu: React.FC = () => {

@@ -12,6 +12,7 @@ const MultipleChoiceQuestion: React.FC<QuestionBodyProps> = ({question, userAnsw
     <IonList>
       {question.answer_choices.map((choice: string, index: number) => (
 	<IonItem
+	  key={index}
 	  button={!isValidated}
 	  onClick={() => {if (!isValidated){setUserAnswer(index);}}}
 	  color={isValidated ? (

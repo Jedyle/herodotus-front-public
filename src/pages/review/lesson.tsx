@@ -36,7 +36,7 @@ const ReviewLesson: React.FC = () => {
       present({
 	message: "You have successfully validated this lesson!",
 	buttons: [
-	  {text: "Continue", handler: (d) => history.push("/page/explore")}
+	  {text: "Continue", handler: () => history.replace("/page/explore")}
 	]
       })
     })

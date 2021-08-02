@@ -26,7 +26,7 @@ const ReviewNewSession: React.FC = () => {
       present({
 	message: "You have successfully completed this session!",
 	buttons: [
-	  {text: "Continue", handler: () => history.push("/page/explore")}
+	  {text: "Continue", handler: () => history.replace("/page/explore")}
 	]
       })
     })

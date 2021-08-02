@@ -11,7 +11,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
-import { searchOutline, searchSharp, personOutline, personSharp} from 'ionicons/icons';
+import { searchOutline, searchSharp, personOutline, personSharp, bookOutline, bookSharp} from 'ionicons/icons';
 import './Menu.css';
 
 interface AppPage {
@@ -29,17 +29,17 @@ const appPages: AppPage[] = [
     mdIcon: searchSharp
   },
   {
+    title: 'Review',
+    url: '/page/new_session',
+    iosIcon: bookOutline,
+    mdIcon: bookSharp
+  },  
+  {
     title: 'Profile',
     url: '/page/profile',
     iosIcon: personOutline,
     mdIcon: personSharp
   },
-  {
-    title: 'Review',
-    url: '/page/new_session',
-    iosIcon: personOutline,
-    mdIcon: personSharp
-  },  
 ];
 
 const Menu: React.FC = () => {

@@ -3,6 +3,8 @@ import { useParams, useLocation } from 'react-router-dom';
 import { useIonViewWillEnter, IonButton } from '@ionic/react';
 import { retrieveLesson } from '../../../services/api';
 
+import Page from '../../Page';
+
 const LessonDisplay: React.FC =  () => {
  
   const obj: {periodSlug: string, categorySlug: string, lessonSlug: string} = useParams();
@@ -19,14 +21,13 @@ const LessonDisplay: React.FC =  () => {
   })
   
   return (
-    <div style={{margin: "20px"}}>
+    <Page name={lesson?.name}
+    content={<div style={{margin: "20px"}}>
       <h1>{lesson?.name}</h1>
-
       <div dangerouslySetInnerHTML={{__html: lesson.article}} ></div>
-
-      <IonButton color="success" href={`${location.pathname}/questions`}>Validate this lesson !</IonButton>
-     
-    </div>
+      <IonButton color="success" href={`${location.pathname}/questions`}>Validate this lesson !</IonButton>     
+    </div>}
+    />
   )
 }
 

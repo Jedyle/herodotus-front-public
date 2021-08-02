@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useIonViewWillEnter } from '@ionic/react';
-import { getLessons } from '../../../services/api';
+import { getLessons, retrieveCategory } from '../../../services/api';
 import AbstractExplorer from '../abstract';
+
+import Page from '../../Page';
 
 const ExploreLessons: React.FC =  () => {
  
@@ -10,6 +12,7 @@ const ExploreLessons: React.FC =  () => {
   const periodSlug = obj['periodSlug'];
   const categorySlug = obj['categorySlug'];
   const [lessons, setLessons] = useState([]);
+  const [category, setCategory] = useState<any>({name: ''});
   
   useIonViewWillEnter(() => {
     getLessons(periodSlug, categorySlug).then((response: any) => {
@@ -17,11 +20,18 @@ const ExploreLessons: React.FC =  () => {
 	(lesson: any) => ({...lesson, 'link': `/page/explore/periods/${periodSlug}/categories/${categorySlug}/lessons/${lesson.slug}`})
       ))
     })
+    retrieveCategory(periodSlug, categorySlug).then((response: any) => {
+      setCategory(response.data)
+    })
+    
   })
   
   return (
-    <AbstractExplorer
-      elements={lessons}
+    <Page
+      name={category.name}
+      content={
+	<AbstractExplorer elements={lessons} />
+      }
     />
   )
 }

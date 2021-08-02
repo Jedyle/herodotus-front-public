@@ -28,6 +28,7 @@ const ExploreLessons: React.FC =  () => {
   
   return (
     <Page
+      key={periodSlug + "/" + categorySlug}
       name={category.name}
       content={
 	<AbstractExplorer elements={lessons} />

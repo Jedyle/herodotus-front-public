@@ -21,12 +21,14 @@ const LessonDisplay: React.FC =  () => {
   })
   
   return (
-    <Page name={lesson?.name}
-    content={<div style={{margin: "20px"}}>
-      <h1>{lesson?.name}</h1>
-      <div dangerouslySetInnerHTML={{__html: lesson.article}} ></div>
-      <IonButton color="success" href={`${location.pathname}/questions`}>Validate this lesson !</IonButton>     
-    </div>}
+    <Page
+      key={periodSlug + "/" + categorySlug + "/" + lessonSlug}
+      name={lesson?.name}
+      content={<div style={{margin: "20px"}}>
+	<h1>{lesson?.name}</h1>
+	<div dangerouslySetInnerHTML={{__html: lesson.article}} ></div>
+	<IonButton color="success" href={`${location.pathname}/questions`}>Validate this lesson !</IonButton>     
+      </div>}
     />
   )
 }

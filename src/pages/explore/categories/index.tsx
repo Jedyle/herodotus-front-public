@@ -26,6 +26,7 @@ const ExploreCategories: React.FC =  () => {
   
   return (
     <Page
+      key={periodSlug}
       name={period.name}
       content={	<AbstractExplorer elements={categories} />}
     />

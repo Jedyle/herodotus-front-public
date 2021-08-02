@@ -48,21 +48,36 @@ const App: React.FC = () => {
             <Route path="/page/explore" exact={true}>
 	      <Page name="Browse Lessons" content={<ExplorePeriods/>}/>
             </Route>
-            <Route path="/page/explore/periods/:periodSlug/categories" exact={true}>
-	      <ExploreCategories/>	      
-	    </Route>
-            <Route path="/page/explore/periods/:periodSlug/categories/:categorySlug/lessons" exact={true}>
-	      <ExploreLessons/>	      
-	    </Route>
-            <Route path="/page/explore/periods/:periodSlug/categories/:categorySlug/lessons/:lessonSlug" exact={true}>
-	      <LessonDisplay/>	      
-	    </Route>
+            <Route
+	      path="/page/explore/periods/:periodSlug/categories"
+	      exact={true}
+	      render={(props) => (
+		<ExploreCategories key={props.match.url}/>	      	
+	      )}
+	    />
+            <Route
+	      path="/page/explore/periods/:periodSlug/categories/:categorySlug/lessons"
+	      exact={true}
+	      render={(props) => (
+		<ExploreLessons key={props.match.url}/>	      	
+	      )}
+	    />	   
+            <Route
+	      path="/page/explore/periods/:periodSlug/categories/:categorySlug/lessons/:lessonSlug" exact={true}
+	      render={(props) => (
+		<LessonDisplay key={props.match.url}/>
+	      )}
+	    />
 	    <Route path="/page/new_session" exact={true}>
 	      <ReviewNewSession />
 	    </Route>
-            <Route path="/page/explore/periods/:periodSlug/categories/:categorySlug/lessons/:lessonSlug/questions" exact={true}>
-	      <ReviewLesson/>
-	    </Route>	    
+            <Route
+	      path="/page/explore/periods/:periodSlug/categories/:categorySlug/lessons/:lessonSlug/questions"
+	      exact={true}
+	      render={(props) => (
+		<ReviewLesson key={props.match.url}/>
+	      )}
+	    />
             <Route path="/page/profile" exact={true}>
 	      <Page name="Profile" content={<Profile/>}/>
             </Route>

@@ -16,7 +16,7 @@ const Explore: React.FC =  () => {
   useIonViewWillEnter(() => {
     getPeriods().then((response: any) => {
       setPeriods(response.data)
-    })
+    }).catch(() => {})
   })
   
   return (

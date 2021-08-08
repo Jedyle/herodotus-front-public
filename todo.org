@@ -1,0 +1,14 @@
+* AUTH
+* SOCIAL AUTH
+* LOGIN
+* Show validated lessons
+* DONE Hide categories with no lesson in it
+  CLOSED: [2021-08-02 lun. 19:51]
+* Profile : change password etc
+* Notification to learn daily ?
+* Button to send feedback ?
+* DONE Change route titles (categories etc)
+  CLOSED: [2021-08-02 lun. 19:13]
+* Multi languages
+* Rm relative imports
+* for later : refresh auth tokens https://stackoverflow.com/questions/14567586/token-authentication-for-restful-api-should-the-token-be-periodically-changed

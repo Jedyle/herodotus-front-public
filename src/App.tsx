@@ -3,6 +3,8 @@ import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 import Menu from './components/Menu';
 import Page from './pages/Page';
+import LoginPage from './pages/login';
+import { InjectAxiosInterceptors } from './services/axios';
 import ExplorePeriods from './pages/explore/periods';
 import ExploreCategories from './pages/explore/categories';
 import ExploreLessons from './pages/explore/lessons';
@@ -11,9 +13,6 @@ import Profile from './pages/profile';
 import ReviewLesson from './pages/review/lesson';
 import ReviewNewSession from './pages/review/newSession';
 
-
-// rm when app finished
-import ReviewSession from './components/reviewSession';
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -39,12 +38,19 @@ const App: React.FC = () => {
   return (
     <IonApp>
       <IonReactRouter>
+	<InjectAxiosInterceptors />	    
         <IonSplitPane contentId="main">
           <Menu />
           <IonRouterOutlet id="main">
             <Route path="/" exact={true}>
-              <Redirect to="/page/explore" />
+              <Redirect to="/page/explore" />	      
             </Route>
+	    <Route path="/prout" exact={true}>
+              <Redirect to="/login" />	      
+            </Route>
+	    <Route path="/login" exact={true}>
+	      <LoginPage />
+	    </Route>
             <Route path="/page/explore" exact={true}>
 	      <Page name="Browse Lessons" content={<ExplorePeriods/>}/>
             </Route>

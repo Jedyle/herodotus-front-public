@@ -17,7 +17,7 @@ const LessonDisplay: React.FC =  () => {
   useIonViewWillEnter(() => {
     retrieveLesson(periodSlug, categorySlug, lessonSlug).then((response: any) => {
       setLesson(response.data)
-    })
+    }).catch(() => {})
   })
   
   return (

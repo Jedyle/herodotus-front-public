@@ -25,10 +25,10 @@ const ReviewLesson: React.FC = () => {
   useIonViewWillEnter(() => {
     getQuestions(periodSlug, categorySlug, lessonSlug).then((response: any) => {
       setQuestions(response.data);
-    })
+    }).catch(() => {})
     retrieveLesson(periodSlug, categorySlug, lessonSlug).then((response: any) => {
       setLesson(response.data);
-    })
+    }).catch(() => {})
   })
 
   const onReviewIsOver = () => {
@@ -39,7 +39,7 @@ const ReviewLesson: React.FC = () => {
 	  {text: "Continue", handler: () => history.replace("/page/explore")}
 	]
       })
-    })
+    }).catch(() => {})
   }
   
   return (

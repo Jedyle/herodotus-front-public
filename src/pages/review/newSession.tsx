@@ -15,10 +15,9 @@ const ReviewNewSession: React.FC = () => {
   const history = useHistory();
   
   useIonViewWillEnter(() => {
-    console.log("ENTER")
     getNewReviewSession().then((response: any) => {
       setQuestions(response.data);
-    })
+    }).catch(() => {})
   })
 
   const onReviewIsOver = () => {

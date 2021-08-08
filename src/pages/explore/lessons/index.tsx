@@ -19,10 +19,10 @@ const ExploreLessons: React.FC =  () => {
       setLessons(response.data.map(
 	(lesson: any) => ({...lesson, 'link': `/page/explore/periods/${periodSlug}/categories/${categorySlug}/lessons/${lesson.slug}`})
       ))
-    })
+    }).catch(() => {})
     retrieveCategory(periodSlug, categorySlug).then((response: any) => {
       setCategory(response.data)
-    })
+    }).catch(() => {})
     
   })
   

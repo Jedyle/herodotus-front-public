@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Storage } from '@capacitor/storage';
+import { store, LOGIN } from './authStore';
 
 const AUTHDATA_KEY = "authData";
 
@@ -43,13 +44,18 @@ async function login(username: string, password: string){
             });
     });
 
-    return Promise.all([loginPromise, userDataPromise]).then((responses) => {
-      let [loginResponse, userResponse] = responses;
-      setAuthData({
-	token: loginResponse.data.key,
-	username: userResponse.data.username
-      })
-    });
+  return Promise.all([loginPromise, userDataPromise]).then((responses) => {
+    let [loginResponse, userResponse] = responses;
+    store.dispatch({
+      type: LOGIN,
+      token: loginResponse.data.key,
+      username: userResponse.data.username
+    })
+    setAuthData({
+      token: loginResponse.data.key,
+      username: userResponse.data.username
+    })
+  });
 };
 
 export { setAuthData, getAuthData, login }

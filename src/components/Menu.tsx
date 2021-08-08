@@ -1,3 +1,5 @@
+import { connect } from 'react-redux';
+
 import {
   IonContent,
   IonIcon,
@@ -19,6 +21,7 @@ interface AppPage {
   iosIcon: string;
   mdIcon: string;
   title: string;
+  isPublic: boolean;
 }
 
 const appPages: AppPage[] = [
@@ -26,23 +29,30 @@ const appPages: AppPage[] = [
     title: 'Explore',
     url: '/page/explore',
     iosIcon: searchOutline,
-    mdIcon: searchSharp
+    mdIcon: searchSharp,
+    isPublic: true
   },
   {
     title: 'Review',
     url: '/page/new_session',
     iosIcon: bookOutline,
-    mdIcon: bookSharp
+    mdIcon: bookSharp,
+    isPublic: true
   },  
   {
     title: 'Profile',
     url: '/page/profile',
     iosIcon: personOutline,
-    mdIcon: personSharp
+    mdIcon: personSharp,
+    isPublic: false
   },
 ];
 
-const Menu: React.FC = () => {
+interface MenuProps {
+  currentUser: string
+}
+
+const _Menu: React.FC<MenuProps> = ({currentUser}) => {
   const location = useLocation();
 
   return (
@@ -52,13 +62,13 @@ const Menu: React.FC = () => {
           <IonListHeader>History App</IonListHeader>
           <IonNote>Learn history, daily.</IonNote>
           {appPages.map((appPage, index) => {
-            return (
+            return ((appPage.isPublic || currentUser != null) ?
               <IonMenuToggle key={index} autoHide={false}>
                 <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
                   <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
                   <IonLabel>{appPage.title}</IonLabel>
                 </IonItem>
-              </IonMenuToggle>
+              </IonMenuToggle> : ""
             );
           })}
         </IonList>
@@ -67,4 +77,8 @@ const Menu: React.FC = () => {
   );
 };
 
-export default Menu;
+const MapStateToProps = (state: any) => ({
+  currentUser: state.username
+})
+
+export default connect(MapStateToProps)(_Menu);

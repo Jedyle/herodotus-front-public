@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { Provider, connect } from 'react-redux';
 import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
@@ -5,6 +7,8 @@ import Menu from './components/Menu';
 import Page from './pages/Page';
 import LoginPage from './pages/login';
 import { InjectAxiosInterceptors } from './services/axios';
+import { getAuthData } from './services/auth';
+import { store, LOGIN } from './services/authStore';
 import ExplorePeriods from './pages/explore/periods';
 import ExploreCategories from './pages/explore/categories';
 import ExploreLessons from './pages/explore/lessons';
@@ -34,9 +38,13 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const App: React.FC = () => {
+interface AppRouterInterface {
+  currentUser: string
+}
+
+const _AppRouter: React.FC<AppRouterInterface> = ({currentUser}) => {
+  console.log("app", currentUser)
   return (
-    <IonApp>
       <IonReactRouter>
 	<InjectAxiosInterceptors />	    
         <IonSplitPane contentId="main">
@@ -44,9 +52,6 @@ const App: React.FC = () => {
           <IonRouterOutlet id="main">
             <Route path="/" exact={true}>
               <Redirect to="/page/explore" />	      
-            </Route>
-	    <Route path="/prout" exact={true}>
-              <Redirect to="/login" />	      
             </Route>
 	    <Route path="/login" exact={true}>
 	      <LoginPage />
@@ -84,13 +89,46 @@ const App: React.FC = () => {
 		<ReviewLesson key={props.match.url}/>
 	      )}
 	    />
-            <Route path="/page/profile" exact={true}>
-	      <Page name="Profile" content={<Profile/>}/>
-            </Route>
+	    <Route path="/page/profile" exact={true}>
+	      {currentUser !== null ?
+	       <Page name="Profile" content={<Profile/>}/> :
+	       <Redirect to="/login" />
+	      }	      
+             </Route>
           </IonRouterOutlet>
         </IonSplitPane>
-      </IonReactRouter>
-    </IonApp>
+      </IonReactRouter>    
+  )
+}
+
+const AppRouterMapState = (state: any) => ({
+  currentUser: state.username 
+});
+
+const AppRouter = connect(AppRouterMapState)(_AppRouter)
+
+const App: React.FC = () => {
+
+  // init auth store with capacitor storage when the app is launched
+  useEffect(() => {
+    getAuthData().then((value) => {
+      console.log("value", value)
+      if (value){
+	store.dispatch({
+	  type: LOGIN,
+	  token: value.token,
+	  username: value.username
+	})
+      }
+    })
+  });
+  
+  return (
+    <Provider store={store}>
+      <IonApp>
+	<AppRouter />
+      </IonApp>      
+    </Provider>
   );
 };
 

@@ -1,10 +1,13 @@
-* AUTH
+* DONE AUTH
+  CLOSED: [2021-08-08 dim. 18:06]
 * SOCIAL AUTH
-* LOGIN
+* DONE LOGIN
+  CLOSED: [2021-08-08 dim. 18:06]
 * Show validated lessons
 * DONE Hide categories with no lesson in it
   CLOSED: [2021-08-02 lun. 19:51]
-* Profile : change password etc
+* DONE Profile : change password etc
+  CLOSED: [2021-08-14 sam. 17:40]
 * Notification to learn daily ?
 * Button to send feedback ?
 * DONE Change route titles (categories etc)

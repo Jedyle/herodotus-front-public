@@ -43,7 +43,6 @@ interface AppRouterInterface {
 }
 
 const _AppRouter: React.FC<AppRouterInterface> = ({currentUser}) => {
-  console.log("app", currentUser)
   return (
       <IonReactRouter>
 	<InjectAxiosInterceptors />	    

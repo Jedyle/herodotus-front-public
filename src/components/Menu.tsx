@@ -12,9 +12,11 @@ import {
   IonNote,
 } from '@ionic/react';
 
-import { useLocation } from 'react-router-dom';
-import { searchOutline, searchSharp, personOutline, personSharp, bookOutline, bookSharp} from 'ionicons/icons';
+import { useLocation, useHistory } from 'react-router-dom';
+import { searchOutline, searchSharp, personOutline, personSharp, bookOutline, bookSharp, logOutOutline, logOutSharp} from 'ionicons/icons';
 import './Menu.css';
+
+import { logout } from '../services/auth';
 
 interface AppPage {
   url: string;
@@ -54,6 +56,7 @@ interface MenuProps {
 
 const _Menu: React.FC<MenuProps> = ({currentUser}) => {
   const location = useLocation();
+  const history = useHistory();
 
   return (
     <IonMenu contentId="main" type="overlay">
@@ -62,7 +65,7 @@ const _Menu: React.FC<MenuProps> = ({currentUser}) => {
           <IonListHeader>History App</IonListHeader>
           <IonNote>Learn history, daily.</IonNote>
           {appPages.map((appPage, index) => {
-            return ((appPage.isPublic || currentUser != null) ?
+            return ((appPage.isPublic || currentUser !== null) ?
               <IonMenuToggle key={index} autoHide={false}>
                 <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
                   <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
@@ -71,6 +74,17 @@ const _Menu: React.FC<MenuProps> = ({currentUser}) => {
               </IonMenuToggle> : ""
             );
           })}
+	  {currentUser !== null ?
+           <IonMenuToggle autoHide={false}>
+             <IonItem
+	       button lines="none" detail={false}
+	       onClick={() => {logout(); history.push("/");}}
+	     >
+               <IonIcon slot="start" ios={logOutOutline} md={logOutSharp} />
+               <IonLabel>Logout</IonLabel>
+             </IonItem>
+           </IonMenuToggle> : ""	  
+	  }
         </IonList>
       </IonContent>
     </IonMenu>

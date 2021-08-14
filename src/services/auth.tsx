@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Storage } from '@capacitor/storage';
-import { store, LOGIN } from './authStore';
+import { store, LOGIN, LOGOUT } from './authStore';
 
 const AUTHDATA_KEY = "authData";
 
@@ -58,4 +58,14 @@ async function login(username: string, password: string){
   });
 };
 
-export { setAuthData, getAuthData, login }
+async function logout(){
+  store.dispatch({
+    type: LOGOUT
+  })
+  setAuthData({
+    token: null,
+    username: null
+  })
+}
+
+export { setAuthData, getAuthData, login, logout }

@@ -3,9 +3,13 @@ import { Provider, connect } from 'react-redux';
 import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
+
+import PrivateRoute from './components/PrivateRoute';
+
 import Menu from './components/Menu';
 import Page from './pages/Page';
 import LoginPage from './pages/login';
+import RegistrationPage from './pages/register';
 import { InjectAxiosInterceptors } from './services/axios';
 import { getAuthData } from './services/auth';
 import { store, LOGIN } from './services/authStore';
@@ -48,13 +52,16 @@ const _AppRouter: React.FC<AppRouterInterface> = ({currentUser}) => {
 	<InjectAxiosInterceptors />	    
         <IonSplitPane contentId="main">
           <Menu />
-          <IonRouterOutlet id="main">
+          <IonRouterOutlet id="main">	    
             <Route path="/" exact={true}>
               <Redirect to="/page/explore" />	      
             </Route>
 	    <Route path="/login" exact={true}>
 	      <LoginPage />
 	    </Route>
+	    <Route path="/register" exact={true}>
+	      <RegistrationPage />
+	    </Route>	    
             <Route path="/page/explore" exact={true}>
 	      <Page name="Browse Lessons" content={<ExplorePeriods/>}/>
             </Route>

@@ -1,9 +1,14 @@
 import { useState } from 'react';
+import { connect } from 'react-redux';
 import { useIonAlert, IonGrid, IonRow, IonCol, IonText, IonLabel, IonButton, IonItem, IonInput} from '@ionic/react';
 
 import { changePassword } from '../../services/api';
 
-const Profile: React.FC =  () => {
+interface ProfileProps {
+  currentUser: string
+}
+
+const _Profile: React.FC<ProfileProps> = ({currentUser}) => {
 
   const [present] = useIonAlert();
   
@@ -23,7 +28,7 @@ const Profile: React.FC =  () => {
   const fields = [["old_password", "Old password"], ["new_password1", "New password"], ["new_password2", "Confirm new password"]];
 
   const onSubmit = () => {
-    changePassword(passwordChangeForm.old_password, passwordChangeForm.new_password1, passwordChangeForm.new_password2).then((response) => {
+    changePassword(passwordChangeForm.old_password, passwordChangeForm.new_password1, passwordChangeForm.new_password2).then(() => {
       present({
 	message: "Your password has been updated !"
       });
@@ -49,8 +54,12 @@ const Profile: React.FC =  () => {
     <IonGrid>
       <IonRow color="primary" justify-content-center>
 	<IonCol className="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+	  <IonText className="ion-text-center">
+	    <h1>Hi, {currentUser}.</h1>
+	  </IonText>
+	  <hr/>
           <div className="ion-text-center">
-	    <h3>Change your password</h3>
+	    <h4>Change your password</h4>
 	    <br/>	    
           </div>
           <div>
@@ -66,7 +75,7 @@ const Profile: React.FC =  () => {
 		      {errors[field]}
 		    </small>
 		  </IonText>
-		  <IonLabel position="floating">{name}</IonLabel>		  
+		  <IonLabel position="stacked">{name}</IonLabel>		  
 		  <IonInput
 		    name={field} type="password" required value={passwordChangeForm[field]}
 		    onIonChange={
@@ -91,4 +100,8 @@ const Profile: React.FC =  () => {
 
 )};
 
-export default Profile;
+const MapStateToProps = (state: any) => ({
+  currentUser: state.username
+})
+
+export default connect(MapStateToProps)(_Profile);

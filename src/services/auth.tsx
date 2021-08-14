@@ -28,6 +28,47 @@ let authApi = axios.create({
   }
 })
 
+// :poop: register is identical to login, because we don't need to confirm the email yet (so that registration is faster)
+async function register(email: string, username: string, password1: string, password2: string){
+    let registerPromise = authApi.post('/registration/', {
+      email: email,
+      username: username,
+      password1: password1,
+      password2: password2      
+    });
+
+    let userDataPromise = registerPromise.then((response) => {
+        return authApi.request(
+          {
+                url: '/user/',
+                headers: {
+                    Authorization: `Token ${response.data.key}`
+                }
+            });
+    });
+
+  return Promise.all([registerPromise, userDataPromise]).then((responses) => {
+    let [loginResponse, userResponse] = responses;
+    store.dispatch({
+      type: LOGIN,
+      token: loginResponse.data.key,
+      username: userResponse.data.username
+    })
+    setAuthData({
+      token: loginResponse.data.key,
+      username: userResponse.data.username
+    })
+  }); 
+}
+
+function dispatchLogin(token: string, username: string){
+  store.dispatch({
+    type: LOGIN,
+    token: token,
+    username: username
+  })
+}
+
 async function login(username: string, password: string){
     let loginPromise = authApi.post('/login/', {
         username: username,
@@ -46,11 +87,7 @@ async function login(username: string, password: string){
 
   return Promise.all([loginPromise, userDataPromise]).then((responses) => {
     let [loginResponse, userResponse] = responses;
-    store.dispatch({
-      type: LOGIN,
-      token: loginResponse.data.key,
-      username: userResponse.data.username
-    })
+    dispatchLogin(loginResponse.data.key, userResponse.data.username)
     setAuthData({
       token: loginResponse.data.key,
       username: userResponse.data.username
@@ -68,4 +105,4 @@ async function logout(){
   })
 }
 
-export { setAuthData, getAuthData, login, logout }
+export { setAuthData, getAuthData, register, dispatchLogin, login, logout }

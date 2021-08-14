@@ -1,18 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import queryString from 'query-string';
 
-import { IonPage, IonContent, IonRow, IonCol, IonGrid, IonItem, IonInput, IonButton, IonText} from '@ionic/react';
+import { useIonViewWillEnter, IonPage, IonContent, IonRow, IonCol, IonGrid, IonItem, IonInput, IonLabel, IonButton, IonText} from '@ionic/react';
 
-import { login } from '../../services/auth';
+import { login, dispatchLogin, getAuthData } from '../../services/auth';
 
 interface User {
   username: string,
   password: string
 }
 
-const LoginPage: React.FC = () => {
+interface LoginPageProps {
+  currentUser: string
+}
+
+const LoginPage: React.FC<LoginPageProps> = ({currentUser}) => {
   
   const { search } = useLocation();
   const history = useHistory();
@@ -41,23 +46,35 @@ const LoginPage: React.FC = () => {
     })
   }
 
+  useIonViewWillEnter(() => {
+    getAuthData().then((value) => {
+      if (value.token !== null && value.username != null){
+	dispatchLogin(value.token, value.username);
+	history.replace(queryParams['redirect'] || "/");
+      }
+    })
+  });
+  
   return (
     <IonPage>
       <IonContent>
 	<IonGrid>
 	  <IonRow color="primary" justify-content-center>
-            <IonCol className="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
-              <div className="ion-text-center">
+	    <IonCol className="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
+	      <div className="ion-text-center">
 		<h3>Login</h3>
-              </div>
-              <div>
+	      </div>
+	      <div>
 		<IonText color="danger">
 		  {errors?.non_field_errors}
 		</IonText>
 		<IonItem>
 		  <IonText color="danger">
-		    {errors?.username}
+		    <small>
+		      {errors?.username}
+		    </small>
 		  </IonText>
+		  <IonLabel position="floating">Username</IonLabel>
 		  <IonInput
 		    name="txt" type="text" placeholder="Username" required value={user.username}
 		    onIonChange={
@@ -66,9 +83,12 @@ const LoginPage: React.FC = () => {
 		    }}></IonInput>
 		</IonItem>
 		<IonItem>
-		<IonText color="danger">
-		  {errors?.password}
-		</IonText>
+		  <IonText color="danger">
+		    <small>
+		      {errors?.password}
+		    </small>
+		  </IonText>
+		  <IonLabel position="floating">Password</IonLabel>		  
 		  <IonInput
 		    name="password" type="password" placeholder="Password" required
 		    value={user.password}
@@ -79,15 +99,26 @@ const LoginPage: React.FC = () => {
 		    }
 		  ></IonInput>
 		</IonItem>
-              </div>
-              <div>
+	      </div>
+	      <div>
 		<IonButton
 		  size="default"
 		  expand="block"
+		  color="success"
 		  onClick={() => onLogin(user)}
 		>Login</IonButton>
-              </div>
-            </IonCol>
+		<p className="ion-text-center">
+		  <IonText>
+		    <small>No account ?</small>
+		  </IonText>		  
+		</p>
+		<IonButton
+		  size="default"
+		  expand="block"
+		  routerLink="/register"
+		>Register</IonButton>		
+	      </div>
+	    </IonCol>
 	  </IonRow>
 	</IonGrid>
       </IonContent>
@@ -95,4 +126,8 @@ const LoginPage: React.FC = () => {
   )
 }
 
-export default LoginPage;
+const MapStateToProps = (state: any) => ({
+  currentUser: state.username
+})
+
+export default connect(MapStateToProps)(LoginPage);

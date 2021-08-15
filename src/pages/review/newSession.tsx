@@ -49,13 +49,13 @@ const ReviewNewSession: React.FC = () => {
         </IonToolbar>
       </IonHeader>            
       <IonContent fullscreen>
-	{questions.length > 0 &&
+	{questions.length > 0 ?
 	 (
 	   <ReviewSession
 	     questions={questions}
 	     onReviewIsOver={onReviewIsOver}
 	   />
-	 )
+	 ) : <div>You have nothing to review yet. Start <a href="/">exploring</a></div>
 	}
       </IonContent>
     </IonPage>

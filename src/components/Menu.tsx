@@ -13,7 +13,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation, useHistory } from 'react-router-dom';
-import { searchOutline, searchSharp, personOutline, personSharp, bookOutline, bookSharp, logOutOutline, logOutSharp} from 'ionicons/icons';
+import { searchOutline, searchSharp, personOutline, personSharp, bookOutline, bookSharp, logOutOutline, logOutSharp, statsChartOutline, statsChartSharp} from 'ionicons/icons';
 import './Menu.css';
 
 import { logout } from '../services/auth';
@@ -48,6 +48,13 @@ const appPages: AppPage[] = [
     mdIcon: personSharp,
     isPublic: false
   },
+  {
+    title: 'My Lessons',
+    url: '/page/my-lessons',
+    iosIcon: statsChartOutline,
+    mdIcon: statsChartSharp,
+    isPublic: false
+  },  
 ];
 
 interface MenuProps {
@@ -78,7 +85,7 @@ const _Menu: React.FC<MenuProps> = ({currentUser}) => {
            <IonMenuToggle autoHide={false}>
              <IonItem
 	       button lines="none" detail={false}
-	       onClick={() => {logout(); history.push("/");}}
+	       onClick={() => {logout(); history.push("/login");}}
 	     >
                <IonIcon slot="start" ios={logOutOutline} md={logOutSharp} />
                <IonLabel>Logout</IonLabel>

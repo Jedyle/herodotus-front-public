@@ -9,24 +9,22 @@ import { retrieveLesson, getQuestions, validateLesson } from '../../services/api
 import ReviewSession from '../../components/reviewSession';
 
 interface LessonParams {
-  periodSlug: string;
-  categorySlug: string;
   lessonSlug: string;
 }
 
 const ReviewLesson: React.FC = () => {
 
-  const {periodSlug, categorySlug, lessonSlug} = useParams<LessonParams>();
+  const {lessonSlug} = useParams<LessonParams>();
   const [lesson, setLesson] = useState({name: null, article: "", slug: ""});
   const [questions, setQuestions] = useState([]);
   const [present] = useIonAlert();
   const history = useHistory();
   
   useIonViewWillEnter(() => {
-    getQuestions(periodSlug, categorySlug, lessonSlug).then((response: any) => {
+    getQuestions(lessonSlug).then((response: any) => {
       setQuestions(response.data);
     }).catch(() => {})
-    retrieveLesson(periodSlug, categorySlug, lessonSlug).then((response: any) => {
+    retrieveLesson(lessonSlug).then((response: any) => {
       setLesson(response.data);
     }).catch(() => {})
   })

@@ -11,8 +11,12 @@ const retrievePeriod = (periodSlug: string) => api.get(`/api/periods/${periodSlu
 const getCategories = (periodSlug: string) => api.get(`/api/periods/${periodSlug}/categories/`);
 const retrieveCategory = (periodSlug: string, categorySlug: string) => api.get(`/api/periods/${periodSlug}/categories/${categorySlug}`);
 const getLessons = (periodSlug: string, categorySlug: string) => api.get(`/api/periods/${periodSlug}/categories/${categorySlug}/lessons/`);
-const retrieveLesson = (periodSlug: string, categorySlug: string, lessonSlug: string) => api.get(`/api/periods/${periodSlug}/categories/${categorySlug}/lessons/${lessonSlug}/`);
-const getQuestions = (periodSlug: string, categorySlug: string, lessonSlug: string) => api.get(`/api/periods/${periodSlug}/categories/${categorySlug}/lessons/${lessonSlug}/questions/`);
+
+const retrieveLesson = (lessonSlug: string) => api.get(`/api/lessons/${lessonSlug}/`);
+
+const getQuestions = (lessonSlug: string) => api.get(`/api/lessons/${lessonSlug}/questions/`);
+
+const getValidatedLessons = () => api.get('/api/lessons/validated');
 
 // todo : allow validation of different levels
 const validateLesson = (lessonSlug: string, level: string = "difficult") => api.post(
@@ -27,4 +31,4 @@ const validateSession = (questionIds: string[]) => api.post("/api/studies/valida
   questions: questionIds.join(",")
 })
 
-export { changePassword, getPeriods, retrievePeriod, getCategories, retrieveCategory, getLessons, retrieveLesson, getQuestions, validateLesson, getNewReviewSession, validateSession };
+export { changePassword, getPeriods, retrievePeriod, getCategories, retrieveCategory, getLessons, retrieveLesson, getQuestions, getValidatedLessons, validateLesson, getNewReviewSession, validateSession };

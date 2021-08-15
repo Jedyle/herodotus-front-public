@@ -5,7 +5,7 @@ interface ItemInterface {
   name: string,
   slug: string;
   order: number,
-  link: string
+  link: string,
 }
 
 interface AbstractExplorerInterface {
@@ -16,7 +16,7 @@ const AbstractExplorer: React.FC<AbstractExplorerInterface> = ({elements}) => {
   return (
     <IonList>
       {elements.map((item: ItemInterface) => (
-	<IonItem routerLink={item.link} key={item.order}>
+	<IonItem routerLink={item.link} key={item.id + item.order}>
 	  <IonLabel>{item.name}</IonLabel>
 	</IonItem>
       ))}

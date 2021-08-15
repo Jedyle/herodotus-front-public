@@ -7,22 +7,20 @@ import Page from '../../Page';
 
 const LessonDisplay: React.FC =  () => {
  
-  const obj: {periodSlug: string, categorySlug: string, lessonSlug: string} = useParams();
-  const periodSlug = obj['periodSlug'];
-  const categorySlug = obj['categorySlug'];
+  const obj: {lessonSlug: string} = useParams();
   const lessonSlug = obj['lessonSlug'];
   const [lesson, setLesson] = useState({name: null, article: ""});
   const location = useLocation();
   
   useIonViewWillEnter(() => {
-    retrieveLesson(periodSlug, categorySlug, lessonSlug).then((response: any) => {
+    retrieveLesson(lessonSlug).then((response: any) => {
       setLesson(response.data)
     }).catch(() => {})
   })
   
   return (
     <Page
-      key={periodSlug + "/" + categorySlug + "/" + lessonSlug}
+      key={"lesson" + lessonSlug}
       name={lesson?.name}
       content={<div style={{margin: "20px"}}>
 	<h1>{lesson?.name}</h1>

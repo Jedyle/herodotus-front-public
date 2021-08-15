@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import { useIonViewWillEnter, IonLoading, IonPage, IonContent, IonRow, IonCol, IonGrid, IonItem, IonInput, IonLabel, IonButton, IonText} from '@ionic/react';
 
-import { register, dispatchLogin, getAuthData } from '../../services/auth';
+import { register, dispatchLogin, getAuthData } from 'services/auth';
 
 import './index.css';
 

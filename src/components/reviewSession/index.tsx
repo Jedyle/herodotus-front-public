@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { QuestionInterface } from '../questions/props';
-import Question from '../questions';
+import { QuestionInterface } from 'components/questions/props';
+import Question from 'components/questions';
 
 interface ReviewSessionProps {
   questions: QuestionInterface[];

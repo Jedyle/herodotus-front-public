@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory, useLocation } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ import queryString from 'query-string';
 
 import { useIonViewWillEnter, useIonViewDidLeave, IonPage, IonContent, IonRow, IonCol, IonGrid, IonItem, IonInput, IonLabel, IonButton, IonText} from '@ionic/react';
 
-import { login, dispatchLogin, getAuthData } from '../../services/auth';
+import { login, dispatchLogin, getAuthData } from 'services/auth';
 
 interface User {
   username: string,

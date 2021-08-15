@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useIonViewWillEnter } from '@ionic/react';
-import { getCategories, retrievePeriod } from '../../../services/api';
-import AbstractExplorer from '../abstract';
+import { getCategories, retrievePeriod } from 'services/api';
+import AbstractExplorer from 'pages/explore/abstract';
 
-import Page from '../../Page';
+import Page from 'pages/Page';
 
 const ExploreCategories: React.FC =  () => {
 

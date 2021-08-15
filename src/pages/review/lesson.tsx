@@ -4,9 +4,9 @@ import { useIonViewWillEnter, useIonAlert, IonButtons, IonContent, IonHeader, Io
 
 import { useParams, useHistory } from 'react-router-dom';
 
-import { retrieveLesson, getQuestions, validateLesson } from '../../services/api';
+import { retrieveLesson, getQuestions, validateLesson } from 'services/api';
 
-import ReviewSession from '../../components/reviewSession';
+import ReviewSession from 'components/reviewSession';
 
 interface LessonParams {
   lessonSlug: string;

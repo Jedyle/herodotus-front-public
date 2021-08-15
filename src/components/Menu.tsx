@@ -16,7 +16,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import { searchOutline, searchSharp, personOutline, personSharp, bookOutline, bookSharp, logOutOutline, logOutSharp, statsChartOutline, statsChartSharp} from 'ionicons/icons';
 import './Menu.css';
 
-import { logout } from '../services/auth';
+import { logout } from 'services/auth';
 
 interface AppPage {
   url: string;
@@ -61,7 +61,7 @@ interface MenuProps {
   currentUser: string
 }
 
-const _Menu: React.FC<MenuProps> = ({currentUser}) => {
+const Menu: React.FC<MenuProps> = ({currentUser}) => {
   const location = useLocation();
   const history = useHistory();
 
@@ -102,4 +102,4 @@ const MapStateToProps = (state: any) => ({
   currentUser: state.username
 })
 
-export default connect(MapStateToProps)(_Menu);
+export default connect(MapStateToProps)(Menu);

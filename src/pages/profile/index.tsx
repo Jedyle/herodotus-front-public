@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import { useIonAlert, IonGrid, IonRow, IonCol, IonText, IonLabel, IonButton, IonItem, IonInput} from '@ionic/react';
 
-import { changePassword } from '../../services/api';
+import { changePassword } from 'services/api';
 
 interface ProfileProps {
   currentUser: string

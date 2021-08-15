@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useIonViewWillEnter } from '@ionic/react';
 
-import { getValidatedLessons } from '../../../services/api';
+import { getValidatedLessons } from 'services/api';
 
-import AbstractExplorer from '../abstract';
+import AbstractExplorer from 'pages/explore/abstract';
 
-import Page from '../../Page';
+import Page from 'pages/Page';
 
 interface LessonInterface {
   id: number,

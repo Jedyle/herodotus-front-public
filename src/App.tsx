@@ -4,23 +4,23 @@ import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 
-import Menu from './components/Menu';
-import Page from './pages/Page';
-import LoginPage from './pages/login';
-import RegistrationPage from './pages/register';
-import { getAuthData } from './services/auth';
-import { store, LOGIN } from './services/authStore';
-import ExplorePeriods from './pages/explore/periods';
-import ExploreCategories from './pages/explore/categories';
-import ExploreLessons from './pages/explore/lessons';
-import LessonDisplay from './pages/explore/lessonDisplay';
-import Profile from './pages/profile';
-import ReviewLesson from './pages/review/lesson';
-import ValidatedLessons from './pages/explore/validatedLessons';
-import ReviewNewSession from './pages/review/newSession';
+import Menu from 'components/Menu';
+import Page from 'pages/Page';
+import LoginPage from 'pages/login';
+import RegistrationPage from 'pages/register';
+import { getAuthData } from 'services/auth';
+import { store, LOGIN } from 'services/authStore';
+import ExplorePeriods from 'pages/explore/periods';
+import ExploreCategories from 'pages/explore/categories';
+import ExploreLessons from 'pages/explore/lessons';
+import LessonDisplay from 'pages/explore/lessonDisplay';
+import Profile from 'pages/profile';
+import ReviewLesson from 'pages/review/lesson';
+import ValidatedLessons from 'pages/explore/validatedLessons';
+import ReviewNewSession from 'pages/review/newSession';
 
 
-import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from 'components/PrivateRoute';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';

@@ -14,5 +14,6 @@
 * DONE Change route titles (categories etc)
   CLOSED: [2021-08-02 lun. 19:13]
 * Multi languages
-* Rm relative imports
+* DONE Rm relative imports
+  CLOSED: [2021-08-15 dim. 14:46]
 * for later : refresh auth tokens https://stackoverflow.com/questions/14567586/token-authentication-for-restful-api-should-the-token-be-periodically-changed

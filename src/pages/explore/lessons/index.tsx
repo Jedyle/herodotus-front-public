@@ -4,9 +4,9 @@ import { useIonViewWillEnter, IonList, IonItem, IonLabel, IonIcon } from '@ionic
 
 import { checkmarkOutline, checkmarkSharp } from 'ionicons/icons';
 
-import { getLessons, retrieveCategory } from '../../../services/api';
+import { getLessons, retrieveCategory } from 'services/api';
 
-import Page from '../../Page';
+import Page from 'pages/Page';
 
 interface LessonInterface {
   id: number,

@@ -4,9 +4,9 @@ import { useIonViewWillEnter, useIonViewDidLeave, useIonAlert, IonButtons, IonCo
 
 import {  useHistory } from 'react-router-dom';
 
-import { getNewReviewSession, validateSession } from '../../services/api';
+import { getNewReviewSession, validateSession } from 'services/api';
 
-import ReviewSession from '../../components/reviewSession';
+import ReviewSession from 'components/reviewSession';
 
 const ReviewNewSession: React.FC = () => {
 

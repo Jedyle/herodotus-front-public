@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Route, RouteProps, Redirect, useHistory } from 'react-router-dom';
+import { Route, RouteProps, Redirect } from 'react-router-dom';
 
-import { dispatchLogin, getAuthData } from '../services/auth';
+import { dispatchLogin, getAuthData } from 'services/auth';
 
 const PrivateRoute: React.FC<RouteProps> = ({...routeProps}) => {
 
@@ -10,7 +10,7 @@ const PrivateRoute: React.FC<RouteProps> = ({...routeProps}) => {
   
   useEffect(() => {
     getAuthData().then((value) => {
-      if (value.token !== null && value.username !== null){
+      if (value && value.token !== null && value.username !== null){
 	dispatchLogin(value.token, value.username);
 	setIsLogged(true);
       }

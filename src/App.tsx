@@ -120,7 +120,6 @@ const App: React.FC = () => {
   // init auth store with capacitor storage when the app is launched
   useEffect(() => {
     getAuthData().then((value) => {
-      console.log("value", value)
       if (value){
 	store.dispatch({
 	  type: LOGIN,

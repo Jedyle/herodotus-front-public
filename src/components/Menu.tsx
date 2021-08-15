@@ -69,7 +69,7 @@ const _Menu: React.FC<MenuProps> = ({currentUser}) => {
     <IonMenu contentId="main" type="overlay">
       <IonContent>
         <IonList id="inbox-list">
-          <IonListHeader>History App</IonListHeader>
+          <IonListHeader>Herodotus</IonListHeader>
           <IonNote>Learn history, daily.</IonNote>
           {appPages.map((appPage, index) => {
             return ((appPage.isPublic || currentUser !== null) ?

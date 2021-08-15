@@ -4,7 +4,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 import queryString from 'query-string';
 
-import { useIonViewWillEnter, IonPage, IonContent, IonRow, IonCol, IonGrid, IonItem, IonInput, IonLabel, IonButton, IonText} from '@ionic/react';
+import { useIonViewWillEnter, useIonViewDidLeave, IonPage, IonContent, IonRow, IonCol, IonGrid, IonItem, IonInput, IonLabel, IonButton, IonText} from '@ionic/react';
 
 import { login, dispatchLogin, getAuthData } from '../../services/auth';
 
@@ -23,21 +23,25 @@ const LoginPage: React.FC<LoginPageProps> = ({currentUser}) => {
   const history = useHistory();
 
   const queryParams: any = queryString.parse(search);
-  
-  const [user, setUser] = useState<User>({
+
+  const blankUserData: User = {
     username: "",
     password: ""
-  })
+  }
+  
+  const [user, setUser] = useState<User>(blankUserData)
 
-  const [errors, setErrors] = useState({
+  const blankErrorsData: any = {
     non_field_errors: [],
     username: [],
     password: []
-  })
+  }
+  
+  const [errors, setErrors] = useState(blankErrorsData)
 
   const onLogin = (user: User) => {
     login(user.username, user.password).then(() => {
-      history.replace(queryParams['redirect'] || "/");
+      history.push(queryParams['redirect'] || "/");
     }).catch(error => {
       if (error.response.status == 400)
       {
@@ -48,12 +52,18 @@ const LoginPage: React.FC<LoginPageProps> = ({currentUser}) => {
 
   useIonViewWillEnter(() => {
     getAuthData().then((value) => {
-      if (value.token !== null && value.username != null){
+      if (value.token !== null && value.username !== null){
 	dispatchLogin(value.token, value.username);
-	history.replace(queryParams['redirect'] || "/");
+	history.push(queryParams['redirect'] || "/");
       }
     })
   });
+
+  useIonViewDidLeave(() => {
+    setUser(blankUserData);
+    setErrors(blankErrorsData);
+  })
+
   
   return (
     <IonPage>

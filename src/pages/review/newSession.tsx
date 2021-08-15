@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import { useIonViewWillEnter, useIonAlert, IonButtons, IonContent, IonHeader, IonMenuButton, IonBackButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { useIonViewWillEnter, useIonViewDidLeave, useIonAlert, IonButtons, IonContent, IonHeader, IonMenuButton, IonBackButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 
-import { useParams, useHistory } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 
 import { getNewReviewSession, validateSession } from '../../services/api';
 
@@ -18,6 +18,10 @@ const ReviewNewSession: React.FC = () => {
     getNewReviewSession().then((response: any) => {
       setQuestions(response.data);
     }).catch(() => {})
+  })
+
+  useIonViewDidLeave(() => {
+    setQuestions([]);
   })
 
   const onReviewIsOver = () => {

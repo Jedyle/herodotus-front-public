@@ -3,7 +3,8 @@
 * SOCIAL AUTH
 * DONE LOGIN
   CLOSED: [2021-08-08 dim. 18:06]
-* Show validated lessons
+* DONE Show validated lessons
+  CLOSED: [2021-08-14 sam. 23:37]
 * DONE Hide categories with no lesson in it
   CLOSED: [2021-08-02 lun. 19:51]
 * DONE Profile : change password etc
@@ -12,6 +13,7 @@
 * Button to send feedback ?
 * DONE Change route titles (categories etc)
   CLOSED: [2021-08-02 lun. 19:13]
+* TODO use modals for login/signup instead of pages (avoid 'previous' issue) -> use store to toggle panels
 * Multi languages
 * Rm relative imports
 * for later : refresh auth tokens https://stackoverflow.com/questions/14567586/token-authentication-for-restful-api-should-the-token-be-periodically-changed

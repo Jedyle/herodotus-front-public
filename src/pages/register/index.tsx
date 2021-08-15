@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { useIonViewWillEnter, IonPage, IonContent, IonRow, IonCol, IonGrid, IonItem, IonInput, IonLabel, IonButton, IonText} from '@ionic/react';
+import { useIonViewWillEnter, IonLoading, IonPage, IonContent, IonRow, IonCol, IonGrid, IonItem, IonInput, IonLabel, IonButton, IonText} from '@ionic/react';
 
 import { register, dispatchLogin, getAuthData } from '../../services/auth';
 
@@ -31,22 +31,27 @@ const RegisterPage: React.FC = () => {
     password2: []
   })
 
+  const [loading, setLoading] = useState(false);
+
   useIonViewWillEnter(() => {
     getAuthData().then((value) => {
-      if (value.token !== null && value.username != null){
+      if (value.token !== null && value.username !== null){
 	dispatchLogin(value.token, value.username);
-	history.replace("/");
+	history.push("/");
       }
     })
   });
 
   const onRegister = (registration: Registration) => {
+    setLoading(true);
     register(registration.email, registration.username, registration.password, registration.password).then(() => {
-      history.replace("/");
+      setLoading(false);
+      history.push("/");
     }).catch(error => {
       if (error.response.status == 400)
       {
 	setErrors(error.response.data);
+	setLoading(false);
       }
     })
   }
@@ -54,6 +59,10 @@ const RegisterPage: React.FC = () => {
   return (
     <IonPage>
       <IonContent>
+	<IonLoading
+	isOpen={loading}
+	message="Please wait..."
+	/>
 	<IonGrid>
 	  <IonRow color="primary" justify-content-center>
 	    <IonCol className="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">

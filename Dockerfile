@@ -4,7 +4,9 @@ ENV REACT_APP_API_URL=https://api.herodotus-app.com
 
 WORKDIR /app
 COPY . .
-RUN yarn install && yarn build
+RUN npm install -g ionic
+RUN npm install
+RUN ionic build --production
 
 FROM nginx:alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf

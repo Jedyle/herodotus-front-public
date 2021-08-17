@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { useIonViewWillEnter, IonLoading, IonPage, IonContent, IonRow, IonCol, IonGrid, IonItem, IonInput, IonLabel, IonButton, IonText} from '@ionic/react';
+import { useIonViewWillEnter, useIonViewDidLeave, IonLoading, IonPage, IonContent, IonRow, IonCol, IonGrid, IonItem, IonInput, IonLabel, IonButton, IonText} from '@ionic/react';
 
 import { register, dispatchLogin, getAuthData } from 'services/auth';
 
@@ -16,20 +16,22 @@ interface Registration {
 const RegisterPage: React.FC = () => {
   
   const history = useHistory();
-  
-  const [registration, setRegistration] = useState<Registration>({
+
+  const blankRegistration: Registration = {
     email: "",
     username: "",
     password: "",
-  })
+  };
+  const [registration, setRegistration] = useState<Registration>(blankRegistration);
 
-  const [errors, setErrors] = useState({
+  const blankErrorsData: any = {
     non_field_errors: [],
     email: [],
     username: [],
     password1: [],
     password2: []
-  })
+  };
+  const [errors, setErrors] = useState(blankErrorsData);
 
   const [loading, setLoading] = useState(false);
 
@@ -40,6 +42,11 @@ const RegisterPage: React.FC = () => {
 	history.push("/");
       }
     })
+  });
+
+  useIonViewDidLeave(() => {
+    setRegistration(blankRegistration);
+    setErrors(blankErrorsData);
   });
 
   const onRegister = (registration: Registration) => {

@@ -1,6 +1,7 @@
 FROM node:16 AS builder
 
-ENV REACT_APP_API_URL=https://api.herodotus-app.com
+ARG REACT_APP_API_URL
+ARG REACT_APP_SENTRY_DSN
 
 WORKDIR /app
 COPY . .

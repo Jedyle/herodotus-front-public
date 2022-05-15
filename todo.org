@@ -19,9 +19,13 @@
 * for later : refresh auth tokens https://stackoverflow.com/questions/14567586/token-authentication-for-restful-api-should-the-token-be-periodically-changed
 
 
-* MONITORING : sentry ?
-* Mail : try except around mail + utiliser mot de passe d'application
-* Permettre d'ajouter des images dans les articles en uploadant soi même les images
+* DONE MONITORING : sentry ?
+  CLOSED: [2021-08-17 mar. 16:33]
+* DONE Mail : try except around mail + utiliser mot de passe d'application
+  CLOSED: [2021-08-17 mar. 16:45]
+* DONE Permettre d'ajouter des images dans les articles en uploadant soi même les images
+  CLOSED: [2021-08-17 mar. 17:41]
 * Use better server
-* Build frontend image from locally and save it to deploy it later
+* DONE Build frontend image from locally and save it to deploy it later
+  CLOSED: [2021-08-17 mar. 16:33]
 * Feedback button

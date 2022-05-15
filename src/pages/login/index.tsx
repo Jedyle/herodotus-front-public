@@ -52,7 +52,7 @@ const LoginPage: React.FC<LoginPageProps> = ({currentUser}) => {
 
   useIonViewWillEnter(() => {
     getAuthData().then((value) => {
-      if (value.token !== null && value.username !== null){
+      if (value && value.token !== null && value.username !== null){
 	dispatchLogin(value.token, value.username);
 	history.push(queryParams['redirect'] || "/");
       }

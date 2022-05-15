@@ -6,6 +6,10 @@ const changePassword = (oldPassword: string, newPassword1: string, newPassword2:
   new_password2: newPassword2
 })
 
+
+// this is a special article present on the 'About' page
+const getAboutPage = () => api.get("/api/articles/about/");
+
 const getPeriods = () => api.get('/api/periods/');
 const retrievePeriod = (periodSlug: string) => api.get(`/api/periods/${periodSlug}/`);
 const getCategories = (periodSlug: string) => api.get(`/api/periods/${periodSlug}/categories/`);
@@ -31,4 +35,4 @@ const validateSession = (questionIds: string[]) => api.post("/api/studies/valida
   questions: questionIds.join(",")
 })
 
-export { changePassword, getPeriods, retrievePeriod, getCategories, retrieveCategory, getLessons, retrieveLesson, getQuestions, getValidatedLessons, validateLesson, getNewReviewSession, validateSession };
+export { changePassword, getAboutPage, getPeriods, retrievePeriod, getCategories, retrieveCategory, getLessons, retrieveLesson, getQuestions, getValidatedLessons, validateLesson, getNewReviewSession, validateSession };

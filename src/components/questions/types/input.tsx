@@ -1,12 +1,15 @@
 import { useRef, useEffect } from 'react';
 
-import { QuestionBodyProps} from '../props';
+import { QuestionBodyProps, QuestionInterface} from '../props';
 import { IonList, IonItem, IonInput, IonIcon, IonText } from '@ionic/react';
 
 import { chevronDownCircleOutline, closeCircleOutline } from 'ionicons/icons';
 import './input.css';
 
-const InputQuestionFactory = (isCorrectFunction: (answer: any, expectedAnswer: any) => boolean) => {
+const InputQuestionFactory = (
+  isCorrectFunction: (answer: any, expectedAnswer: any) => boolean,
+  displayCorrectAnswerFunc: (question: QuestionInterface) => string = (question) => question.answer
+) => {
 
   const InputQuestion: React.FC<QuestionBodyProps> = ({question, userAnswer, setUserAnswer, isValidated}) => {
 
@@ -55,7 +58,7 @@ const InputQuestionFactory = (isCorrectFunction: (answer: any, expectedAnswer: a
 	 (
 	   <p className="ion-text-center" style={{'marginTop': '5px'}}>
 	     <IonText color="danger">
-	       The answer was {question.answer}
+	       The answer was {displayCorrectAnswerFunc(question)}
 	     </IonText>
 	   </p>
 	 ) : ""

@@ -72,6 +72,8 @@ const LoginPage: React.FC<LoginPageProps> = ({currentUser}) => {
 	  <IonRow color="primary" justify-content-center>
 	    <IonCol className="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
 	      <div className="ion-text-center">
+		<h1>Herodotus App</h1>
+		<hr/>
 		<h3>Login</h3>
 	      </div>
 	      <div>
@@ -126,7 +128,20 @@ const LoginPage: React.FC<LoginPageProps> = ({currentUser}) => {
 		  size="default"
 		  expand="block"
 		  routerLink="/register"
-		>Register</IonButton>		
+		>Register</IonButton>
+		<p className="ion-text-center">
+		  <IonText>
+		    <small>Want to know more ?</small>
+		  </IonText>		  
+		</p>		
+		<IonButton
+		  size="default"
+		  expand="block"
+		  routerLink="/about"
+		  color="medium"
+		>
+		  About this app		  
+		</IonButton>
 	      </div>
 	    </IonCol>
 	  </IonRow>

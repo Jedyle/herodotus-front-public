@@ -73,6 +73,8 @@ const Menu: React.FC<MenuProps> = ({currentUser}) => {
   const location = useLocation();
   const history = useHistory();
 
+  const userIsLoggedIn = !(currentUser === null || currentUser === undefined);
+  
   return (
     <IonMenu contentId="main" type="overlay">
       <IonContent>
@@ -80,7 +82,7 @@ const Menu: React.FC<MenuProps> = ({currentUser}) => {
           <IonListHeader>Herodotus</IonListHeader>
           <IonNote>Learn history, daily.</IonNote>
           {appPages.map((appPage, index) => {
-            return ((appPage.isPublic || currentUser !== null) ?
+            return ((appPage.isPublic || userIsLoggedIn) ?
               <IonMenuToggle key={index} autoHide={false}>
                 <IonItem className={location.pathname === appPage.url ? 'selected' : ''} routerLink={appPage.url} routerDirection="none" lines="none" detail={false}>
                   <IonIcon slot="start" ios={appPage.iosIcon} md={appPage.mdIcon} />
@@ -89,7 +91,7 @@ const Menu: React.FC<MenuProps> = ({currentUser}) => {
               </IonMenuToggle> : ""
             );
           })}
-	  {currentUser !== null ?
+	  {userIsLoggedIn ?
            <IonMenuToggle autoHide={false}>
              <IonItem
 	       button lines="none" detail={false}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { useIonViewWillEnter, IonButton } from '@ionic/react';
 import { retrieveLesson } from 'services/api';
 
@@ -8,6 +8,7 @@ import Page from 'pages/Page';
 const LessonDisplay: React.FC =  () => {
  
   const obj: {lessonSlug: string} = useParams();
+  const history = useHistory();
   const lessonSlug = obj['lessonSlug'];
   const [lesson, setLesson] = useState({name: null, article: ""});
   const location = useLocation();
@@ -25,7 +26,10 @@ const LessonDisplay: React.FC =  () => {
       content={<div style={{margin: "20px"}}>
 	<h1>{lesson?.name}</h1>
 	<div dangerouslySetInnerHTML={{__html: lesson.article}} ></div>
-	<IonButton color="success" href={`${location.pathname}/questions`}>Review this lesson !</IonButton>     
+	<IonButton
+	  color="success"
+	  onClick={() => history.push(`${location.pathname}/questions`)}
+	>Review this lesson !</IonButton>     
       </div>}
     />
   )

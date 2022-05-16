@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { useIonViewWillEnter } from '@ionic/react';
 import { Route, RouteProps, Redirect } from 'react-router-dom';
 
 import { dispatchLogin, getAuthData } from 'services/auth';
 
-const PrivateRoute: React.FC<RouteProps> = ({...routeProps}) => {
+const PrivatePage: React.FC<any> = ({render, ...props}) => {
 
   const [isLogged, setIsLogged] = useState(true);
   
-  useEffect(() => {
+  useIonViewWillEnter(() => {
     getAuthData().then((value) => {
       if (value && value.token !== null && value.username !== null){
 	dispatchLogin(value.token, value.username);
@@ -18,13 +18,13 @@ const PrivateRoute: React.FC<RouteProps> = ({...routeProps}) => {
 	setIsLogged(false);
       }
     })      
-  }, []);
-  
-  return (isLogged ?
-    <Route
-      {...routeProps}
-    / > : <Redirect to="/login" />
+  });
+
+  return (
+    isLogged ?
+    render(props) : <Redirect to="/login" />
   );
 }
 
-export default PrivateRoute;
+
+export default PrivatePage;

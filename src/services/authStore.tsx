@@ -27,7 +27,10 @@ export const authReducer = (state: any = {token: null, username: null}, action: 
 	username: action.username
       });
     case LOGOUT:
-      return {};
+      return {
+	token: null,
+	username: null
+      };
     default:
       return state || {};
   }

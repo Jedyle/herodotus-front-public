@@ -28,7 +28,7 @@ const LessonDisplay: React.FC =  () => {
 	<div dangerouslySetInnerHTML={{__html: lesson.article}} ></div>
 	<IonButton
 	  color="success"
-	  onClick={() => history.push(`${location.pathname}/questions`)}
+	  routerLink={`${location.pathname}/questions`}
 	>Review this lesson !</IonButton>     
       </div>}
     />

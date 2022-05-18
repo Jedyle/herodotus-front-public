@@ -8,6 +8,7 @@ import Menu from 'components/Menu';
 import Page from 'pages/Page';
 import LoginPage from 'pages/login';
 import AboutPage from 'pages/about';
+import FeedbackPage from 'pages/feedback';
 import RegistrationPage from 'pages/register';
 import { getAuthData } from 'services/auth';
 import { store, LOGIN } from 'services/authStore';
@@ -52,6 +53,7 @@ const _AppRouter: React.FC<AppRouterInterface> = ({ currentUser }) => {
         <Menu />
         <IonRouterOutlet id="main">
           <Route path="/about" exact={true} component={AboutPage} />
+	  <Route path="/feedback" exact={true} component={FeedbackPage} />
           <Route path="/" exact={true}>
             <Redirect to="/page/explore" />
           </Route>

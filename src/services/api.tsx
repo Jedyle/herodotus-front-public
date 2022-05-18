@@ -35,4 +35,6 @@ const validateSession = (questionIds: string[]) => api.post("/api/studies/valida
   questions: questionIds.join(",")
 })
 
-export { changePassword, getAboutPage, getPeriods, retrievePeriod, getCategories, retrieveCategory, getLessons, retrieveLesson, getQuestions, getValidatedLessons, validateLesson, getNewReviewSession, validateSession };
+const sendFeedback = (data: any) => api.post("/api/feedbacks/", data);
+
+export { changePassword, getAboutPage, getPeriods, retrievePeriod, getCategories, retrieveCategory, getLessons, retrieveLesson, getQuestions, getValidatedLessons, validateLesson, getNewReviewSession, validateSession, sendFeedback };

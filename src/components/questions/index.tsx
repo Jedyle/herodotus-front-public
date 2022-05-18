@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonText, IonButton } from '@ionic/react';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton } from '@ionic/react';
 import MultipleChoiceQuestion, { isChoiceCorrect } from './types/multipleChoice';
 import NumberQuestion, { isNumberCorrect } from './types/number';
 import TextQuestion, {isTextCorrect } from './types/text';

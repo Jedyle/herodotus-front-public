@@ -13,7 +13,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation, useHistory } from 'react-router-dom';
-import { searchOutline, searchSharp, personOutline, personSharp, bookOutline, bookSharp, logOutOutline, logOutSharp, statsChartOutline, statsChartSharp, helpCircleSharp, helpCircleOutline } from 'ionicons/icons';
+import { searchOutline, searchSharp, personOutline, personSharp, bookOutline, bookSharp, logOutOutline, logOutSharp, statsChartOutline, statsChartSharp, informationCircleOutline, informationCircleSharp, helpCircleSharp, helpCircleOutline } from 'ionicons/icons';
 import './Menu.css';
 
 import { logout } from 'services/auth';
@@ -58,11 +58,17 @@ const appPages: AppPage[] = [
   {
     title: 'About',
     url: '/about',
+    iosIcon: informationCircleOutline,
+    mdIcon: informationCircleSharp,
+    isPublic: true
+  },
+  {
+    title: 'Feedback',
+    url: '/feedback',
     iosIcon: helpCircleOutline,
     mdIcon: helpCircleSharp,
     isPublic: true
-  },  
-  
+  },      
 ];
 
 interface MenuProps {

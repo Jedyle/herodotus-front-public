@@ -111,6 +111,19 @@ const LoginPage: React.FC<LoginPageProps> = ({currentUser}) => {
 		    }
 		  ></IonInput>
 		</IonItem>
+		<IonText className="ion-text-end">
+		  <small>
+		    <p>
+		      <a
+			href={`${process.env.REACT_APP_API_URL}/reset_password/`}
+			style={
+			{
+			  textDecoration: "none",
+			  color: "black"
+			}}
+		      >Forgot password ?</a>
+		    </p></small>
+		</IonText>		  		  
 	      </div>
 	      <div>
 		<IonButton
@@ -121,7 +134,9 @@ const LoginPage: React.FC<LoginPageProps> = ({currentUser}) => {
 		>Login</IonButton>
 		<p className="ion-text-center">
 		  <IonText>
-		    <small>No account ?</small>
+		    <small>
+		      No account ?
+		    </small>
 		  </IonText>		  
 		</p>
 		<IonButton

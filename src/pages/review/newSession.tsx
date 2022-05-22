@@ -4,7 +4,7 @@ import { useIonViewWillEnter, useIonViewDidLeave, useIonAlert, IonButtons, IonCo
 
 import {  useHistory } from 'react-router-dom';
 
-import { getNewReviewSession, validateSession } from 'services/api';
+import { getNewReviewSession, validateRevision } from 'services/api';
 
 import ReviewSession from 'components/reviewSession';
 
@@ -25,14 +25,18 @@ const ReviewNewSession: React.FC = () => {
   })
 
   const onReviewIsOver = () => {
-    validateSession(questions.map((question) => (question.id))).then(() => {
+    /* validateSession(questions.map((question) => (question.id))).then(() => { */
       present({
 	message: "You have successfully completed this session!",
 	buttons: [
 	  {text: "Continue", handler: () => history.replace("/page/explore")}
 	]
       })
-    })
+    /* }) */
+  }
+
+  const onQuestionIsValidated = (questionId: number, firstAnswerWasCorrect: boolean) => {
+    validateRevision(questionId, firstAnswerWasCorrect);
   }
   
   return (
@@ -54,6 +58,7 @@ const ReviewNewSession: React.FC = () => {
 	   <ReviewSession
 	     questions={questions}
 	     onReviewIsOver={onReviewIsOver}
+	     onQuestionIsValidated={onQuestionIsValidated}
 	   />
 	 ) : <div>You have nothing to review yet. Start <a href="/">exploring</a></div>
 	}

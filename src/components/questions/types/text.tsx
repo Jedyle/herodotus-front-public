@@ -8,8 +8,7 @@ const checkSingleAnswer = (answer: string, expected: string) => {
 const isTextCorrect = (answer : string, expectedAnswer : Array<string>) => {
   // expectedAnswer is a list of possible answers
   // for example : Octavian, Octavianus
-  for (let possibleAnswer of expectedAnswer){
-    console.log(possibleAnswer);
+  for (let possibleAnswer of expectedAnswer){    
     if (checkSingleAnswer(answer, possibleAnswer)){
       return true;
     }

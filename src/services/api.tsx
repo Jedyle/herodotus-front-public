@@ -31,10 +31,12 @@ const validateLesson = (lessonSlug: string, level: string = "difficult") => api.
 )
 
 const getNewReviewSession = () => api.get("/api/studies/new_session/")
-const validateSession = (questionIds: string[]) => api.post("/api/studies/validate_session", {
-  questions: questionIds.join(",")
+const validateRevision = (question: number, first_answer_was_correct: boolean) => api.post("/api/studies/validate_revision", {
+  question: question,
+  first_answer_was_correct: first_answer_was_correct	 
 })
+
 
 const sendFeedback = (data: any) => api.post("/api/feedbacks/", data);
 
-export { changePassword, getAboutPage, getPeriods, retrievePeriod, getCategories, retrieveCategory, getLessons, retrieveLesson, getQuestions, getValidatedLessons, validateLesson, getNewReviewSession, validateSession, sendFeedback };
+export { changePassword, getAboutPage, getPeriods, retrievePeriod, getCategories, retrieveCategory, getLessons, retrieveLesson, getQuestions, getValidatedLessons, validateLesson, getNewReviewSession, validateRevision, sendFeedback };

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useIonViewWillEnter, IonText } from '@ionic/react';
 import { getPeriods } from 'services/api';
 import AbstractExplorer from 'pages/explore/abstract';
@@ -23,7 +24,7 @@ const ExplorePeriods: React.FC =  () => {
       <br/>
       <div className="ion-text-center">
 	<IonText>
-	  <small>This app is currently in beta : any feedback or bug report (in the App Store) is highly appreciated !</small>	
+	  <small>This app is currently in beta : any <Link to="/feedback">feedback</Link> is highly appreciated !</small>	
 	</IonText>
       </div>
     </>

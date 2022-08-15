@@ -15,7 +15,7 @@ jobs:
       - name: Build Docker Image
         run: docker build . -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }} --build-arg BACKEND_URL=${{ env.BACKEND_URL }} --build-arg REACT_APP_SENTRY_DSN=${{ env.SENTRY_DSN }}
       - name: Run Container Backend
-        run: docker run -d -it --name ${{ env.DOCKER_CONTAINER_NAME }} --network ${{ env.DOCKER_NETWORK_NAME }} ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }} sh        
+        run: docker run -d -it --name ${{ env.DOCKER_CONTAINER_NAME }} ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }} sh        
       - name: Run Tests
         run: docker exec ${{ env.DOCKER_CONTAINER_NAME }} ls
       - name: Publish Docker Image

@@ -1,0 +1,21 @@
+name: Backend CI
+on: [push, pull_request]
+jobs:
+  RunTests:    
+    runs-on: ubuntu-latest
+    env:
+      DOCKERHUB_USERNAME: jeremylixandre
+      IMAGE_NAME: herodotus:frontend_${{ github.ref_name }}_${{ github.run_number }}
+      DOCKER_CONTAINER_NAME: herodotus
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Build Docker Image
+        run: docker build . -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
+      - name: Run Tests
+        run: docker exec -e ${{ env.DOCKER_CONTAINER_NAME }} ls
+      - name: Publish Docker Image
+        if: ${{ success() && github.ref_name == 'master' }}
+        run: |
+          docker login -u ${{ env.DOCKERHUB_USERNAME}} -p ${{ secrets.DOCKERHUB_ACCESS_TOKEN }}
+          docker push ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}

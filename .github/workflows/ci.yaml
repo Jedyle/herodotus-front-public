@@ -7,11 +7,13 @@ jobs:
       DOCKERHUB_USERNAME: jeremylixandre
       IMAGE_NAME: herodotus:frontend_${{ github.ref_name }}_${{ github.run_number }}
       DOCKER_CONTAINER_NAME: herodotus
+      BACKEND_URL: https://api.herodotus-app.com
+      REACT_APP_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Build Docker Image
-        run: docker build . -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
+        run: docker build . -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }} --build-arg BACKEND_URL=${{ env.BACKEND_URL }} --build-arg REACT_APP_SENTRY_DSN=${{ env.SENTRY_DSN }}
       - name: Run Tests
         run: docker exec ${{ env.DOCKER_CONTAINER_NAME }} ls
       - name: Publish Docker Image

@@ -1,16 +1,17 @@
 import { useState } from 'react';
-import { useParams, useLocation, useHistory } from 'react-router-dom';
-import { useIonViewWillEnter, IonButton } from '@ionic/react';
+import { useParams, useLocation } from 'react-router-dom';
+import { useIonViewWillEnter } from '@ionic/react';
 import { retrieveLesson } from 'services/api';
+import { LessonInterface } from 'interfaces/lessons';
 
 import Page from 'pages/Page';
+import LessonDisplay from 'components/lessonDisplay';
 
-const LessonDisplay: React.FC =  () => {
+const Lesson: React.FC =  () => {
  
   const obj: {lessonSlug: string} = useParams();
-  const history = useHistory();
   const lessonSlug = obj['lessonSlug'];
-  const [lesson, setLesson] = useState({name: null, article: ""});
+  const [lesson, setLesson] = useState<LessonInterface|null>(null);
   const location = useLocation();
   
   useIonViewWillEnter(() => {
@@ -23,17 +24,12 @@ const LessonDisplay: React.FC =  () => {
     <Page
       key={"lesson" + lessonSlug}
       name={lesson?.name}
-      content={<div style={{margin: "20px"}}>
-	<h1>{lesson?.name}</h1>
-	<div dangerouslySetInnerHTML={{__html: lesson.article}} ></div>
-	<IonButton
-	  color="success"
-	  routerLink={`${location.pathname}/questions`}
-	>Review this lesson !</IonButton>     
-      </div>}
+      content={
+	lesson && <LessonDisplay lesson={lesson} />
+      }
     />
   )
 }
 
-export default LessonDisplay;
+export default Lesson;
 

@@ -28,4 +28,13 @@
 * Use better server
 * DONE Build frontend image from locally and save it to deploy it later
   CLOSED: [2021-08-17 mar. 16:33]
-* Feedback button
+* DONE Feedback button
+CLOSED: [2022-08-21 dim. 12:28]
+
+
+
+* Lesson slides
+** show progress bar
+** go back or forward only by clicking on a button
+
+* Refacto props in separate folder

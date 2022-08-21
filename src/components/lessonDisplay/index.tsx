@@ -34,8 +34,8 @@ const LessonDisplay: React.FC<LessonDisplayProps> = ({lesson}) => {
   }  
 
   return (
-    <div style={{height: "calc(100vh - 56px)", display: "flex", flexDirection: "column", marginLeft: "10px", marginRight: "10px"}}>
-      <div style={{flexGrow: 1, height: "calc(100vh - 56px)", overflow: "scroll"}} dangerouslySetInnerHTML={{__html: lesson.slides[currentSlide].content}}></div>
+    <div style={{height: "calc(100% - 56px)", display: "flex", flexDirection: "column", marginLeft: "10px", marginRight: "10px"}}>
+      <div style={{flexGrow: 1, height: "calc(100% - 56px)", overflow: "scroll"}} dangerouslySetInnerHTML={{__html: lesson.slides[currentSlide].content}}></div>
       <IonGrid>
 	<IonRow>
 	  <IonCol size="6">

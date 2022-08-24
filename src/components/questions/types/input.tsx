@@ -17,7 +17,7 @@ const InputQuestionFactory = (
     const isUserAnswerCorrect : boolean = userAnswer !== null && isCorrectFunction(userAnswer, question.answer);
 
     useEffect(() => {
-      setTimeout(() => inputRef.current.setFocus(), 100);
+      inputRef && setTimeout(() => inputRef.current.setFocus(), 100);
     })
     
     return (

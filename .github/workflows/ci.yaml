@@ -13,7 +13,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Build Docker Image
-        run: docker build . -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }} --build-arg REACT_APP_API_URL=${{ env.REACT_APP_API_URL }} --build-arg REACT_APP_SENTRY_DSN=${{ env.SENTRY_DSN }}
+        run: docker build . -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }} --build-arg REACT_APP_API_URL=${{ env.REACT_APP_API_URL }} --build-arg REACT_APP_SENTRY_DSN=${{ env.SENTRY_DSN }} --build-arg REACT_APP_GA_TRACKING_ID='G-8LQ3VBHXGD'
       - name: Run Container
         run: docker run -d -it --name ${{ env.DOCKER_CONTAINER_NAME }} ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }} sh        
       - name: Run Tests

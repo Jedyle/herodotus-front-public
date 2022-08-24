@@ -10,6 +10,7 @@ FROM base AS builder
 
 ARG REACT_APP_API_URL
 ARG REACT_APP_SENTRY_DSN
+ARG REACT_APP_GA_TRACKING_ID
 
 COPY . .
 RUN npm install -g ionic

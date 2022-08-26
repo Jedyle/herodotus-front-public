@@ -17,8 +17,8 @@ const InputQuestionFactory = (
     const isUserAnswerCorrect : boolean = userAnswer !== null && isCorrectFunction(userAnswer, question.answer);
 
     useEffect(() => {
-      inputRef && setTimeout(() => inputRef.current.setFocus(), 100);
-    })
+      setTimeout(() => inputRef?.current?.setFocus(), 100);
+    }, [])
     
     return (
       <IonList>

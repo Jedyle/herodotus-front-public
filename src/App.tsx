@@ -4,6 +4,8 @@ import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 
+import { displayProgramLink, displayLessonLink, reviewLessonLink } from 'services/links';
+
 import Menu from 'components/Menu';
 import Page from 'pages/Page';
 import LoginPage from 'pages/login';
@@ -12,13 +14,11 @@ import FeedbackPage from 'pages/feedback';
 import RegistrationPage from 'pages/register';
 import { getAuthData } from 'services/auth';
 import { store, LOGIN } from 'services/authStore';
-import ExplorePeriods from 'pages/explore/periods';
-import ExploreCategories from 'pages/explore/categories';
-import ExploreLessons from 'pages/explore/lessons';
+import ExplorePrograms from 'pages/explore/program';
+import DisplayProgram from 'pages/explore/programDetails';
 import LessonDisplay from 'pages/explore/lessonDisplay';
 import Profile from 'pages/profile';
 import ReviewLesson from 'pages/review/lesson';
-import ValidatedLessons from 'pages/explore/validatedLessons';
 import ReviewNewSession from 'pages/review/newSession';
 
 import PrivatePage from 'components/PrivatePage';
@@ -50,82 +50,57 @@ const _AppRouter: React.FC<AppRouterInterface> = ({ currentUser }) => {
   return (
     <IonReactRouter>
       <IonSplitPane contentId="main">
-        <Menu />
-        <IonRouterOutlet id="main">
-          <Route path="/about" exact={true} component={AboutPage} />
+	<Menu />
+	<IonRouterOutlet id="main">
+	  <Route path="/about" exact={true} component={AboutPage} />
 	  <Route path="/feedback" exact={true} component={FeedbackPage} />
-          <Route path="/" exact={true}>
-            <Redirect to="/page/explore" />
-          </Route>
-          <Route path="/login" exact={true} component={LoginPage} />
-          <Route path="/register" exact={true} component={RegistrationPage} />
-          <Route
+	  <Route path="/" exact={true}>
+	    <Redirect to="/page/explore" />
+	  </Route>
+	  <Route path="/login" exact={true} component={LoginPage} />
+	  <Route path="/register" exact={true} component={RegistrationPage} />
+	  <Route
 	    path="/page/explore"
 	    exact={true}
 	    render={
-	    () => (
-	      <PrivatePage
-		render={() =>
-		  <Page name="Browse Lessons" content={<ExplorePeriods />} />
-		}
-	      />)
-	    }
-	  />           
-          <Route
-            path="/page/my-lessons"
-            exact={true}
-            render={() => <PrivatePage render={() => <ValidatedLessons />} />}
-          />
-          <Route
-            path="/page/explore/periods/:periodSlug/categories"
-            exact={true}
-            render={(props) => (
-	      <PrivatePage render={() => <ExploreCategories key={props.match.url}/>} />
-            )}
-          />
-          <Route
-            path="/page/explore/periods/:periodSlug/categories"
-            exact={true}
-            render={(props) => (
-	      <PrivatePage render={() => <ExploreCategories key={props.match.url} />} />
-            )}
-          />
-          <Route
-            path="/page/explore/periods/:periodSlug/categories/:categorySlug/lessons"
-            exact={true}
-            render={(props) => (
-	      <PrivatePage render={() => <ExploreLessons key={props.match.url} />} />
-            )}
-          />
-          <Route
-            path="/page/explore/lessons/:lessonSlug" exact={true}
-            render={(props) => (
+	    () => (<Page name="Browse" content={<ExplorePrograms />} />)
+	    }    
+	  />
+	  <Route
+	    path={displayProgramLink(":programSlug")}
+	    exact={true}
+	    render={(props) => (<DisplayProgram key={props.match.url} />)}
+	  />
+	  <Route
+	    path={displayLessonLink(":programSlug", ":lessonSlug")}
+	    exact={true}
+	    render={(props) => (
 	      <PrivatePage render={() => <LessonDisplay key={props.match.url} />} />	      
-            )}
-          />
-          <Route
+	    )}
+	  />
+	  <Route
+	    path={reviewLessonLink(":programSlug", ":lessonSlug")}
+	    exact={true}
+	    render={(props) => (
+	      <PrivatePage render={() => <ReviewLesson key={props.match.url} />} />	      
+	    )}
+	  />
+	  <Route
 	    path="/page/new_session"
 	    exact={true}
 	    render={
 	    () => <PrivatePage render={() => <ReviewNewSession />} />
 	    }
 	  />
-          <Route
-            path="/page/explore/lessons/:lessonSlug/questions"
-            exact={true}
-            render={(props) => (
-	      <PrivatePage render={() => <ReviewLesson key={props.match.url} />} />	      
-            )}
-          />
-          <Route
+	  <Route
 	    path="/page/profile"
 	    exact={true}
 	    render={
 	    () => (
 	      <PrivatePage
-		render={
-		() => <Page name="Profile" content={<Profile />} />
-		}
+	      render={
+	      () => <Page name="Profile" content={<Profile />} />
+	      }
 	      />)}	    
 	  />
         </IonRouterOutlet>

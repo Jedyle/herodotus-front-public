@@ -49,13 +49,6 @@ const appPages: AppPage[] = [
     isPublic: false
   },
   {
-    title: 'My Lessons',
-    url: '/page/my-lessons',
-    iosIcon: statsChartOutline,
-    mdIcon: statsChartSharp,
-    isPublic: false
-  },
-  {
     title: 'About',
     url: '/about',
     iosIcon: informationCircleOutline,

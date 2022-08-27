@@ -6,25 +6,24 @@ import { useParams, useHistory } from 'react-router-dom';
 
 import { retrieveLesson, getQuestions, validateLesson } from 'services/api';
 
-import ReviewSession from 'components/reviewSession';
-
-interface LessonParams {
-  lessonSlug: string;
-}
+import ReviewSession from 'components/reviewSession'
+import { LessonInterface } from 'interfaces/lessons';
 
 const ReviewLesson: React.FC = () => {
 
-  const {lessonSlug} = useParams<LessonParams>();
-  const [lesson, setLesson] = useState({name: null, article: "", slug: ""});
+  const obj: {programSlug: string, lessonSlug: string} = useParams();
+  const lessonSlug = obj['lessonSlug'];
+  const programSlug = obj['programSlug'];  
+  const [lesson, setLesson] = useState<LessonInterface|null>(null);
   const [questions, setQuestions] = useState([]);
   const [present] = useIonAlert();
   const history = useHistory();
   
   useIonViewWillEnter(() => {
-    getQuestions(lessonSlug).then((response: any) => {
+    getQuestions(programSlug, lessonSlug).then((response: any) => {
       setQuestions(response.data);
     }).catch(() => {})
-    retrieveLesson(lessonSlug).then((response: any) => {
+    retrieveLesson(programSlug, lessonSlug).then((response: any) => {
       setLesson(response.data);
     }).catch(() => {})
   })
@@ -47,7 +46,7 @@ const ReviewLesson: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>{lesson.name}</IonTitle>
+          <IonTitle>{lesson?.name}</IonTitle>
 	  <IonButtons slot="end">
 	    <IonBackButton />
           </IonButtons>

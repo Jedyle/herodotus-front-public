@@ -1,17 +1,13 @@
 import { useRef, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useIonViewDidEnter, IonButton, IonGrid, IonCol, IonRow } from '@ionic/react';
+import { reviewLessonLink } from 'services/links';
 import { LessonInterface, SlideInterface } from 'interfaces/lessons';
 import { dice } from 'ionicons/icons';
 
 interface LessonDisplayProps {
   lesson: LessonInterface
 }
-
-const slideOpts = {
-  initialSlide: 0,
-  speed: 400
-};
 
 const LessonDisplay: React.FC<LessonDisplayProps> = ({lesson}) => {
   const location = useLocation();
@@ -48,7 +44,7 @@ const LessonDisplay: React.FC<LessonDisplayProps> = ({lesson}) => {
 	    {isEnd() ?
 	     <IonButton
 	       color="success"
-	       routerLink={`${location.pathname}/questions`}
+	       routerLink={reviewLessonLink(lesson.program.slug, lesson.slug)}
 	     >Review !</IonButton>   :
 	     <IonButton expand="block"
 			onClick={slideNext}

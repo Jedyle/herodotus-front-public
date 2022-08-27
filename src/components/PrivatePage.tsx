@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useIonViewWillEnter } from '@ionic/react';
-import { Route, RouteProps, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import { dispatchLogin, getAuthData } from 'services/auth';
 

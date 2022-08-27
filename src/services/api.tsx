@@ -16,11 +16,18 @@ const getCategories = (periodSlug: string) => api.get(`/api/periods/${periodSlug
 const retrieveCategory = (periodSlug: string, categorySlug: string) => api.get(`/api/periods/${periodSlug}/categories/${categorySlug}`);
 const getLessons = (periodSlug: string, categorySlug: string) => api.get(`/api/periods/${periodSlug}/categories/${categorySlug}/lessons/`);
 
-const retrieveLesson = (lessonSlug: string) => api.get(`/api/lessons/${lessonSlug}/`);
+// const retrieveLesson = (lessonSlug: string) => api.get(`/api/lessons/${lessonSlug}/`);
 
-const getQuestions = (lessonSlug: string) => api.get(`/api/lessons/${lessonSlug}/questions/`);
+// const getQuestions = (lessonSlug: string) => api.get(`/api/lessons/${lessonSlug}/questions/`);
 
+const getPrograms = () => api.get("/api/programs/");
+const retrieveProgram = (programSlug: string) => api.get(`/api/programs/${programSlug}/`);
+const retrieveLesson = (programSlug: string, lessonSlug: string) => api.get(`/api/programs/${programSlug}/lessons/${lessonSlug}/`);
+const getQuestions = (programSlug: string, lessonSlug: string) => api.get(`/api/programs/${programSlug}/lessons/${lessonSlug}/questions/`);
+
+// to remove
 const getValidatedLessons = () => api.get('/api/lessons/validated');
+
 
 // todo : allow validation of different levels
 const validateLesson = (lessonSlug: string, level: string = "difficult") => api.post(
@@ -39,4 +46,4 @@ const validateRevision = (question: number, first_answer_was_correct: boolean) =
 
 const sendFeedback = (data: any) => api.post("/api/feedbacks/", data);
 
-export { changePassword, getAboutPage, getPeriods, retrievePeriod, getCategories, retrieveCategory, getLessons, retrieveLesson, getQuestions, getValidatedLessons, validateLesson, getNewReviewSession, validateRevision, sendFeedback };
+export { changePassword, getAboutPage, getPeriods, retrievePeriod, getCategories, retrieveCategory, getLessons, retrieveLesson, getQuestions, getPrograms, retrieveProgram, getValidatedLessons, validateLesson, getNewReviewSession, validateRevision, sendFeedback };

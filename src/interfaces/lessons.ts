@@ -13,4 +13,5 @@ export interface LessonInterface {
   article: string,
   order: number,
   category: number
+  program: any
 }

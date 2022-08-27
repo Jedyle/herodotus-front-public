@@ -63,7 +63,7 @@ const _AppRouter: React.FC<AppRouterInterface> = ({ currentUser }) => {
 	    path="/page/explore"
 	    exact={true}
 	    render={
-	    () => (<Page name="Browse" content={<ExplorePrograms />} />)
+	    () => (<Page name="Programs" content={<ExplorePrograms />} />)
 	    }    
 	  />
 	  <Route

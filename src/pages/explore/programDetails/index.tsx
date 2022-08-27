@@ -4,48 +4,30 @@ import { useIonViewWillEnter, IonList, IonItem, IonLabel, IonIcon } from '@ionic
 
 import { checkmarkOutline, checkmarkSharp } from 'ionicons/icons';
 
-import { getLessons, retrieveCategory, retrieveProgram } from 'services/api';
+import { getAuthData } from 'services/auth';
+import { retrieveProgram } from 'services/api';
 import { displayLessonLink } from 'services/links';
+import { ShortLessonInterface, UserProgramInterface, ProgramInterface } from 'interfaces/lessons';
 
 import Page from 'pages/Page';
 
-interface LessonInterface {
-  id: number,
-  name: string,
-  slug: string,
-}
-
-interface UserProgramInterface {
-  user: string,
-  lessons_done: Array<LessonInterface>,
-  lessons_available: Array<LessonInterface>
-}
-
-interface ProgramInterface {
-  name: string,
-  slug: string,
-  description: string,
-  lessons: Array<LessonInterface>
-  user_program: UserProgramInterface|null
-}
-
-interface ProgramExplorerProps {
+interface LessonsExplorerProps {
   program: ProgramInterface
 }
 
 
-const userHasValidatedLesson = (user_program: UserProgramInterface, lesson: LessonInterface) => {
-  return user_program && (user_program.lessons_done.map((lesson: LessonInterface) => lesson.id).includes(lesson.id))
+const userHasValidatedLesson = (user_program: UserProgramInterface, lesson: ShortLessonInterface) => {
+  return user_program && (user_program.lessons_done.map((lesson: ShortLessonInterface) => lesson.id).includes(lesson.id))
 }
 
-const userHasAccessToLesson = (user_program: UserProgramInterface, lesson: LessonInterface, index: number) => {
-  return user_program ? (user_program.lessons_available.map((lesson: LessonInterface) => lesson.id).includes(lesson.id)) : index === 0;
+const userHasAccessToLesson = (user_program: UserProgramInterface, lesson: ShortLessonInterface, index: number) => {
+  return user_program ? (user_program.lessons_available.map((lesson: ShortLessonInterface) => lesson.id).includes(lesson.id)) : index === 0;
 }
 
-const ProgramExplorer: React.FC<ProgramExplorerProps> = ({program}) => {
+const LessonsExplorer: React.FC<LessonsExplorerProps> = ({program}) => {
   return program && (
     <IonList>
-      {program.lessons.map((lesson: LessonInterface, index: number) => (
+      {program.lessons.map((lesson: ShortLessonInterface, index: number) => (
 	<IonItem
 	  disabled={!userHasAccessToLesson(program.user_program, lesson, index)}
 	  routerLink={displayLessonLink(program.slug, lesson.slug)} key={lesson.slug}>
@@ -78,7 +60,7 @@ const DisplayProgram: React.FC =  () => {
     <Page
       name={program?.name}
       content={
-	<ProgramExplorer program={program} />
+	<LessonsExplorer program={program} />
       }
     />
   )

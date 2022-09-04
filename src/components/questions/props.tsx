@@ -7,7 +7,7 @@ interface QuestionInterface {
   answer_details: string;
   level: string;
   photo: string;
-  lesson: number;
+  lesson: string;
 }
 
 interface QuestionBodyProps {

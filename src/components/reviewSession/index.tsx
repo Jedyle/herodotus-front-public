@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { useIonViewWillEnter, useIonAlert, IonButtons, IonContent, IonHeader, IonMenuButton, IonBackButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+
 import { QuestionInterface } from 'components/questions/props';
 import Question from 'components/questions';
 
@@ -52,13 +54,39 @@ const ReviewSession: React.FC<ReviewSessionProps> = ({questions, onQuestionIsVal
     })
   }
   
-  return (questionsState.current ?
+  /* return (questionsState.current ?
+     <Question
+     key={questionsState.index}
+     question={questionsState.current}
+     onTriggerNextButton={onTriggerNextButton}
+     /> : (<div></div>)    
+   * );
+   */
+  return (
+    <>
+      <IonHeader>
+	<IonToolbar>
+	  <IonButtons slot="start">
+	    <IonMenuButton />
+	  </IonButtons>
+	  <IonTitle>{questionsState?.current?.lesson || "Review"}</IonTitle>
+	  <IonButtons slot="end">
+	    <IonBackButton />
+	  </IonButtons>
+	</IonToolbar>
+      </IonHeader>            
+      <IonContent fullscreen>
+	{
+	  questionsState.current ?
 	  <Question
 	    key={questionsState.index}
 	    question={questionsState.current}
 	    onTriggerNextButton={onTriggerNextButton}
 	  /> : (<div></div>)    
-  );
+	}
+      </IonContent>
+    </>
+  )
 };
 
 export default ReviewSession;

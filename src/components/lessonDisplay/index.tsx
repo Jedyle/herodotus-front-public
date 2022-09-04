@@ -1,17 +1,13 @@
-import { useRef, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useIonViewDidEnter, IonButton, IonGrid, IonCol, IonRow } from '@ionic/react';
+import { useState } from 'react';
+import { IonButton, IonGrid, IonCol, IonRow } from '@ionic/react';
 import { reviewLessonLink } from 'services/links';
-import { LessonInterface, SlideInterface } from 'interfaces/lessons';
-import { dice } from 'ionicons/icons';
+import { LessonInterface } from 'interfaces/lessons';
 
 interface LessonDisplayProps {
   lesson: LessonInterface
 }
 
 const LessonDisplay: React.FC<LessonDisplayProps> = ({lesson}) => {
-  const location = useLocation();
-
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
   const isBeginning = () => (currentSlide === 0);

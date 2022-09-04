@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useIonViewWillEnter, useIonAlert, IonButtons, IonContent, IonHeader, IonMenuButton, IonBackButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { useIonViewWillEnter, useIonAlert, IonPage } from '@ionic/react';
 
 import { useParams, useHistory } from 'react-router-dom';
 
@@ -41,27 +41,13 @@ const ReviewLesson: React.FC = () => {
   
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>{lesson?.name}</IonTitle>
-	  <IonButtons slot="end">
-	    <IonBackButton />
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>            
-      <IonContent fullscreen>
-	{questions.length > 0 ?
-	 (
-	   <ReviewSession
-	     questions={questions}
-	     onReviewIsOver={onReviewIsOver}
-	   />
-	 ): <div>You have nothing to review yet. Start <a href="/">exploring</a></div>
-	}
-      </IonContent>
+      {questions.length > 0 ? (
+	<ReviewSession
+	  questions={questions}
+	  onReviewIsOver={onReviewIsOver}
+	/>
+      ): <div>You have nothing to review yet. Start <a href="/">exploring </a> !</div>
+      }
     </IonPage>
   );
 }

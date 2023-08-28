@@ -1,10 +1,10 @@
-FROM node:16 AS base
+FROM node:18 AS base
 
 RUN mkdir -p /app
 WORKDIR /app
 
 RUN npm install -g ionic
-CMD ionic serve
+CMD npm install; ionic serve
 
 FROM base AS builder
 

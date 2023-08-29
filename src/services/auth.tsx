@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Storage } from '@capacitor/storage';
+import { Preferences } from '@capacitor/preferences';
 import { store, LOGIN, LOGOUT } from './authStore';
 
 const AUTHDATA_KEY = "authData";
@@ -10,16 +10,16 @@ interface AuthData {
 }
 
 const setAuthData = async (authData: AuthData) => {
-  await Storage.set({
+  await Preferences.set({
     key: AUTHDATA_KEY,
     value: JSON.stringify(authData)
   });
 }
 
 const getAuthData = async () => {
-  const { value } = await Storage.get({key: AUTHDATA_KEY});
+  const { value } = await Preferences.get({key: AUTHDATA_KEY});
   return value ? JSON.parse(value) : null;
-} 
+}
 
 let authApi = axios.create({
   baseURL : `${process.env.REACT_APP_API_URL}/rest-auth`,
@@ -34,7 +34,7 @@ async function register(email: string, username: string, password1: string, pass
       email: email,
       username: username,
       password1: password1,
-      password2: password2      
+      password2: password2
     });
 
     let userDataPromise = registerPromise.then((response) => {
@@ -58,7 +58,7 @@ async function register(email: string, username: string, password1: string, pass
       token: loginResponse.data.key,
       username: userResponse.data.username
     })
-  }); 
+  });
 }
 
 function dispatchLogin(token: string, username: string){

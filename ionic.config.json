@@ -1,7 +1,7 @@
 {
-  "name": "historyFront",
+  "name": "herodotus",
   "integrations": {
     "capacitor": {}
   },
-  "type": "react"
+  "type": "react-vite"
 }

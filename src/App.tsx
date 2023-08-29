@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Provider, connect } from 'react-redux';
-import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
 
@@ -43,100 +43,101 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 interface AppRouterInterface {
-  currentUser: string
+    currentUser: string
 }
 
+setupIonicReact();
+
 const _AppRouter: React.FC<AppRouterInterface> = ({ currentUser }) => {
-  return (
-    <IonReactRouter>
-      <IonSplitPane contentId="main">
-	<Menu />
-	<IonRouterOutlet id="main">
-	  <Route path="/about" exact={true} component={AboutPage} />
-	  <Route path="/feedback" exact={true} component={FeedbackPage} />
-	  <Route path="/" exact={true}>
-	    <Redirect to="/page/explore" />
-	  </Route>
-	  <Route path="/login" exact={true} component={LoginPage} />
-	  <Route path="/register" exact={true} component={RegistrationPage} />
-	  <Route
-	    path="/page/explore"
-	    exact={true}
-	    render={
-	    () => (<Page name="Programs" content={<ExplorePrograms />} />)
-	    }    
-	  />
-	  <Route
-	    path={displayProgramLink(":programSlug")}
-	    exact={true}
-	    render={(props) => (<DisplayProgram key={props.match.url} />)}
-	  />
-	  <Route
-	    path={displayLessonLink(":programSlug", ":lessonSlug")}
-	    exact={true}
-	    render={(props) => (
-	      <PrivatePage render={() => <LessonDisplay key={props.match.url} />} />	      
-	    )}
-	  />
-	  <Route
-	    path={reviewLessonLink(":programSlug", ":lessonSlug")}
-	    exact={true}
-	    render={(props) => (
-	      <PrivatePage render={() => <ReviewLesson key={props.match.url} />} />	      
-	    )}
-	  />
-	  <Route
-	    path="/page/new_session"
-	    exact={true}
-	    render={
-	    () => <PrivatePage render={() => <ReviewNewSession />} />
-	    }
-	  />
-	  <Route
-	    path="/page/profile"
-	    exact={true}
-	    render={
-	    () => (
-	      <PrivatePage
-	      render={
-	      () => <Page name="Profile" content={<Profile />} />
-	      }
-	      />)}	    
-	  />
-        </IonRouterOutlet>
-      </IonSplitPane>
-    </IonReactRouter>
-  )
+    return (
+        <IonReactRouter>
+            <IonSplitPane contentId="main">
+                <Menu />
+                <IonRouterOutlet id="main">
+                    <Route path="/about" exact={true} component={AboutPage} />
+                    <Route path="/feedback" exact={true} component={FeedbackPage} />
+                    <Route path="/" exact={true}>
+                        <Redirect to="/page/explore" />
+                    </Route>
+                    <Route path="/login" exact={true} component={LoginPage} />
+                    <Route path="/register" exact={true} component={RegistrationPage} />
+                    <Route
+                        path="/page/explore"
+                        exact={true}
+                        render={
+                            () => (<Page name="Programs" content={<ExplorePrograms />} />)
+                        }
+                    />
+                    <Route
+                        path={displayProgramLink(":programSlug")}
+                        exact={true}
+                        render={(props) => (<DisplayProgram key={props.match.url} />)}
+                    />
+                    <Route
+                        path={displayLessonLink(":programSlug", ":lessonSlug")}
+                        exact={true}
+                        render={(props) => (
+                            <PrivatePage render={() => <LessonDisplay key={props.match.url} />} />
+                        )}
+                    />
+                    <Route
+                        path={reviewLessonLink(":programSlug", ":lessonSlug")}
+                        exact={true}
+                        render={(props) => (
+                            <PrivatePage render={() => <ReviewLesson key={props.match.url} />} />
+                        )}
+                    />
+                    <Route
+                        path="/page/new_session"
+                        exact={true}
+                        render={
+                            () => <PrivatePage render={() => <ReviewNewSession />} />
+                        }
+                    />
+                    <Route
+                        path="/page/profile"
+                        exact={true}
+                        render={
+                            () => (
+                                <PrivatePage
+                                    render={
+                                        () => <Page name="Profile" content={<Profile />} />
+                                    }
+                                />)}
+                    />
+                </IonRouterOutlet>
+            </IonSplitPane>
+        </IonReactRouter>
+    )
 }
 
 const AppRouterMapState = (state: any) => ({
-  currentUser: state.username
+    currentUser: state.username
 });
 
 const AppRouter = connect(AppRouterMapState)(_AppRouter)
 
 const App: React.FC = () => {
 
-  // init auth store with capacitor storage when the app is launched
-  useEffect(() => {
-    getAuthData().then((value) => {
-      if (value) {
-        store.dispatch({
-          type: LOGIN,
-          token: value.token,
-          username: value.username
+    useEffect(() => {
+        getAuthData().then((value) => {
+            if (value) {
+                store.dispatch({
+                    type: LOGIN,
+                    token: value.token,
+                    username: value.username
+                })
+            }
         })
-      }
-    })
-  });
+    });
 
-  return (
-    <Provider store={store}>
-      <IonApp>
-        <AppRouter />
-      </IonApp>
-    </Provider>
-  );
+    return (
+        <Provider store={store} >
+            <IonApp>
+                <AppRouter />
+            </IonApp>
+        </Provider>
+    );
 };
 
 export default App;

@@ -115,7 +115,7 @@ const LoginPage: React.FC<LoginPageProps> = ({currentUser}) => {
 		  <small>
 		    <p>
 		      <a
-			href={`${process.env.REACT_APP_API_URL}/reset_password/`}
+			href={`${import.meta.env.VITE_APP_API_URL}/reset_password/`}
 			style={
 			{
 			  textDecoration: "none",

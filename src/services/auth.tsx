@@ -22,7 +22,7 @@ const getAuthData = async () => {
 }
 
 let authApi = axios.create({
-  baseURL : `${process.env.REACT_APP_API_URL}/rest-auth`,
+  baseURL : `${import.meta.env.VITE_APP_API_URL}/rest-auth`,
   headers : {
     'Content-Type': 'application/json'
   }

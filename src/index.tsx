@@ -7,7 +7,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
 Sentry.init({
-  dsn: process.env.SENTRY_DSN,
+  dsn: import.meta.env.VITE_SENTRY_DSN,
   integrations: [new Integrations.BrowserTracing()],
 
   // Set tracesSampleRate to 1.0 to capture 100%

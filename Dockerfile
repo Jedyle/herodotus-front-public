@@ -1,9 +1,9 @@
-FROM node:18 AS base
+FROM node:18.17.1 AS base
 
 RUN mkdir -p /app
 WORKDIR /app
 
-RUN npm install -g ionic
+RUN npm install -g @ionic/cli@7.1.1
 CMD npm install; ionic serve
 
 FROM base AS builder
@@ -13,7 +13,7 @@ ARG REACT_APP_SENTRY_DSN
 ARG REACT_APP_GA_TRACKING_ID
 
 COPY . .
-RUN npm install -g ionic
+RUN npm install -g @ionic/cli@7.1.1
 RUN npm install
 
 RUN ionic build --production

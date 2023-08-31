@@ -40,3 +40,5 @@ CLOSED: [2022-08-21 dim. 12:28]
 * Refacto props in separate folder
 
 * TODO change tooltip on iconicons by default
+
+* TODO : on mobile, validation is done after focus is changed (ex: try feedback and write something)

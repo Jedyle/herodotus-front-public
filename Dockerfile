@@ -1,19 +1,17 @@
-FROM node:18.17.1 AS base
+FROM node:18.17.1 AS dev
 
 RUN mkdir -p /app
 WORKDIR /app
 
-RUN npm install -g @ionic/cli@7.1.1
-CMD npm install; ionic serve --host=0.0.0.0
+CMD npm install; npx ionic serve --host=0.0.0.0
 
-FROM base AS builder
+FROM dev AS builder
 
 ARG VITE_APP_API_URL
 ARG VITE_APP_SENTRY_DSN
 ARG VITE_APP_GA_TRACKING_ID
 
 COPY . .
-RUN npm install -g @ionic/cli@7.1.1
 RUN npm install
 
 RUN ionic build --production

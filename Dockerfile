@@ -14,7 +14,7 @@ ARG VITE_APP_GA_TRACKING_ID
 COPY . .
 RUN npm install
 
-RUN ionic build --production
+RUN npx ionic build --production
 
 FROM nginx:alpine as prod
 COPY nginx.conf /etc/nginx/conf.d/default.conf

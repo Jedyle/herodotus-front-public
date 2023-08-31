@@ -13,7 +13,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Build Docker Image
-        run: docker build . -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }} --build-arg VITE_APP_API_URL=${{ env.REACT_APP_API_URL }} --build-arg VITE_SENTRY_DSN=${{ env.SENTRY_DSN }} --build-arg VITE_GA_TRACKING_ID='G-8LQ3VBHXGD'
+        run: docker build . -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }} --build-arg VITE_APP_API_URL=${{ env.VITE_APP_API_URL }} --build-arg VITE_SENTRY_DSN=${{ env.VITE_SENTRY_DSN }} --build-arg VITE_GA_TRACKING_ID='G-8LQ3VBHXGD'
       - name: Run Container
         run: docker run -d -it --name ${{ env.DOCKER_CONTAINER_NAME }} ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }} sh
       - name: Run Tests

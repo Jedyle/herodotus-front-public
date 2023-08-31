@@ -8,8 +8,8 @@ CMD npm install; npx ionic serve --host=0.0.0.0
 FROM dev AS builder
 
 ARG VITE_APP_API_URL
-ARG VITE_APP_SENTRY_DSN
-ARG VITE_APP_GA_TRACKING_ID
+ARG VITE_SENTRY_DSN
+ARG VITE_GA_TRACKING_ID
 
 COPY . .
 RUN npm install

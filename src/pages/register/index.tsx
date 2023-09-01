@@ -78,7 +78,6 @@ const RegisterPage: React.FC = () => {
                             <div>
                                 <IonText color="danger">
                                     {errors?.non_field_errors}
-                                    {JSON.stringify(registration)}
                                 </IonText>
 
                                 <IonItem>

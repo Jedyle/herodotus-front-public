@@ -3,7 +3,8 @@ import { useHistory } from 'react-router-dom';
 
 import { useIonViewWillEnter, useIonViewDidLeave, IonLoading, IonPage, IonContent, IonRow, IonCol, IonGrid, IonItem, IonInput, IonLabel, IonButton, IonText } from '@ionic/react';
 
-import { register, dispatchLogin, getAuthData } from 'services/auth';
+import { register, getAuthData } from 'services/auth';
+import { storeLogin } from 'services/authStore';
 
 import './index.css';
 
@@ -38,7 +39,7 @@ const RegisterPage: React.FC = () => {
     useIonViewWillEnter(() => {
         getAuthData().then((value) => {
             if (value.token !== null && value.username !== null) {
-                dispatchLogin(value.token, value.username);
+                storeLogin(value.token, value.username);
                 history.push("/");
             }
         })
@@ -52,6 +53,7 @@ const RegisterPage: React.FC = () => {
     const onRegister = (registration: Registration) => {
         setLoading(true);
         register(registration.email, registration.username, registration.password, registration.password).then(() => {
+            // here, save information in tmp storage for first lesson
             setLoading(false);
             history.push("/");
         }).catch(error => {

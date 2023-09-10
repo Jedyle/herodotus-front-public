@@ -13,7 +13,7 @@ import AboutPage from 'pages/about';
 import FeedbackPage from 'pages/feedback';
 import RegistrationPage from 'pages/register';
 import { getAuthData } from 'services/auth';
-import { store, LOGIN } from 'services/authStore';
+import { store, storeLogin } from 'services/authStore';
 import ExplorePrograms from 'pages/explore/program';
 import DisplayProgram from 'pages/explore/programDetails';
 import LessonDisplay from 'pages/explore/lessonDisplay';
@@ -122,11 +122,9 @@ const App: React.FC = () => {
     useEffect(() => {
         getAuthData().then((value) => {
             if (value) {
-                store.dispatch({
-                    type: LOGIN,
-                    token: value.token,
-                    username: value.username
-                })
+                storeLogin(
+                    value.token, value.username
+                )
             }
         })
     });

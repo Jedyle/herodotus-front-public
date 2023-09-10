@@ -6,7 +6,8 @@ import queryString from 'query-string';
 
 import { useIonViewWillEnter, useIonViewDidLeave, IonPage, IonContent, IonRow, IonCol, IonGrid, IonItem, IonInput, IonLabel, IonButton, IonText } from '@ionic/react';
 
-import { login, dispatchLogin, getAuthData } from 'services/auth';
+import { login, getAuthData } from 'services/auth';
+import { storeLogin } from 'services/authStore';
 
 interface User {
     username: string,
@@ -52,7 +53,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ currentUser }) => {
     useIonViewWillEnter(() => {
         getAuthData().then((value) => {
             if (value && value.token !== null && value.username !== null) {
-                dispatchLogin(value.token, value.username);
+                storeLogin(value.token, value.username);
                 history.push(queryParams['redirect'] || "/");
             }
         })

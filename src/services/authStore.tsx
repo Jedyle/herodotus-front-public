@@ -1,4 +1,6 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
+
+// NOTE : if more change need, this store should be refactored and divided between auth and lessons stuff
 
 // action types
 
@@ -13,16 +15,42 @@ export const authReducer = (state: any = { token: null, username: null }, action
                 username: action.username
             });
         case LOGOUT:
-            return {
+            return Object.assign({}, state, {
                 token: null,
                 username: null
-            };
+            });
         default:
-            return state || {};
+            return state;
     }
 }
 
-export const store = createStore(authReducer);
+export const ADD_LESSON = "ADD_LESSON";
+export const RESET_LESSON = "RESET_LESSON";
+
+export const lessonReducer = (state: any = { lesson: null }, action: any) => {
+    console.log("in lesson red", state);
+    switch (action.type) {
+        case ADD_LESSON:
+            return Object.assign({}, state, {
+                lesson: action.lesson
+            })
+        case RESET_LESSON:
+            return Object.assign({}, state, {
+                lesson: null
+            });
+        default:
+            return state;
+    }
+}
+
+const rootReducer = combineReducers({
+    auth: authReducer,
+    lesson: lessonReducer
+})
+
+export const store = createStore(rootReducer);
+
+/* export const store = createStore(authReducer); */
 
 // actions
 
@@ -37,5 +65,12 @@ export function storeLogin(token: string, username: string) {
 export function storeLogout() {
     store.dispatch({
         type: LOGOUT
+    })
+}
+
+export function storeAddLesson(lesson: any) {
+    store.dispatch({
+        type: ADD_LESSON,
+        lesson: lesson
     })
 }

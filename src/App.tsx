@@ -76,16 +76,12 @@ const _AppRouter: React.FC<AppRouterInterface> = ({ currentUser }) => {
                     <Route
                         path={displayLessonLink(":programSlug", ":lessonSlug")}
                         exact={true}
-                        render={(props) => (
-                            <PrivatePage render={() => <LessonDisplay key={props.match.url} />} />
-                        )}
+                        render={(props) => (<LessonDisplay key={props.match.url} />)}
                     />
                     <Route
                         path={reviewLessonLink(":programSlug", ":lessonSlug")}
                         exact={true}
-                        render={(props) => (
-                            <PrivatePage render={() => <ReviewLesson key={props.match.url} />} />
-                        )}
+                        render={(props) => (<ReviewLesson key={props.match.url} />)}
                     />
                     <Route
                         path="/page/new_session"
@@ -112,7 +108,7 @@ const _AppRouter: React.FC<AppRouterInterface> = ({ currentUser }) => {
 }
 
 const AppRouterMapState = (state: any) => ({
-    currentUser: state.username
+    currentUser: state.auth.username
 });
 
 const AppRouter = connect(AppRouterMapState)(_AppRouter)

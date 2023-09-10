@@ -167,7 +167,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ currentUser }) => {
 }
 
 const MapStateToProps = (state: any) => ({
-    currentUser: state.username
+    currentUser: state.auth.username
 })
 
 export default connect(MapStateToProps)(LoginPage);

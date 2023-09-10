@@ -11,6 +11,10 @@
 # production
 /build
 
+# play store / keystore files
+release-keystore
+playstore_exports
+
 # misc
 .DS_Store
 .env.local

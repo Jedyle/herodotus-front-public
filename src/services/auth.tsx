@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Preferences } from '@capacitor/preferences';
-import { store, storeLogin, storeLogout } from './authStore';
+import { storeLogin, storeLogout } from './authStore';
 
 const AUTHDATA_KEY = "authData";
 

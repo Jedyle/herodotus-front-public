@@ -2,30 +2,30 @@ import { IonButtons, IonContent, IonHeader, IonMenuButton, IonBackButton, IonPag
 import './Page.css';
 
 interface PageInterface {
-  content: React.ReactNode,
-  name: string
+    content: React.ReactNode,
+    name: string
 }
 
-const Page: React.FC<PageInterface> = ({name, content}) => {
+const Page: React.FC<PageInterface> = ({ name, content }) => {
 
-  return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton />
-          </IonButtons>
-          <IonTitle>{name}</IonTitle>
-	  <IonButtons slot="end">
-	    <IonBackButton />
-          </IonButtons>
-        </IonToolbar>
-      </IonHeader>            
-      <IonContent fullscreen>
-	{content}
-      </IonContent>
-    </IonPage>
-  );
+    return (
+        <IonPage>
+            <IonHeader>
+                <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton />
+                    </IonButtons>
+                    <IonTitle>{name}</IonTitle>
+                    <IonButtons slot="end">
+                        <IonBackButton />
+                    </IonButtons>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent fullscreen>
+                {content}
+            </IonContent>
+        </IonPage>
+    );
 };
 
 export default Page;

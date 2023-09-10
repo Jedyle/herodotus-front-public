@@ -7,29 +7,30 @@ import { LessonInterface } from 'interfaces/lessons';
 import Page from 'pages/Page';
 import LessonDisplay from 'components/lessonDisplay';
 
-const Lesson: React.FC =  () => {
- 
-  const obj: {programSlug: string, lessonSlug: string} = useParams();
-  const lessonSlug = obj['lessonSlug'];
-  const programSlug = obj['programSlug'];
+const Lesson: React.FC = () => {
 
-  const [lesson, setLesson] = useState<LessonInterface|null>(null);
-  
-  useIonViewWillEnter(() => {
-    retrieveLesson(programSlug, lessonSlug).then((response: any) => {
-      setLesson(response.data)
-    }).catch(() => {})
-  })
-  
-  return (
-    <Page
-      key={"lesson" + lessonSlug}
-      name={lesson?.name}
-      content={
-	lesson && <LessonDisplay lesson={lesson} />
-      }
-    />
-  )
+    const obj: { programSlug: string, lessonSlug: string } = useParams();
+    const lessonSlug = obj['lessonSlug'];
+    const programSlug = obj['programSlug'];
+
+    const [lesson, setLesson] = useState<LessonInterface | null>(null);
+
+    useIonViewWillEnter(() => {
+        console.log("entering !!!!")
+        retrieveLesson(programSlug, lessonSlug).then((response: any) => {
+            setLesson(response.data)
+        }).catch(() => { })
+    })
+
+    return (
+        <Page
+            key={"lesson" + lessonSlug}
+            name={lesson?.name}
+            content={
+                lesson && <LessonDisplay lesson={lesson} />
+            }
+        />
+    )
 }
 
 export default Lesson;

@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { connect } from 'react-redux';
 
+import { storeAddLesson } from 'services/authStore';
 import { useIonViewWillEnter, useIonAlert, IonPage } from '@ionic/react';
 
 import { useParams, useHistory } from 'react-router-dom';
@@ -9,7 +11,7 @@ import { retrieveLesson, getQuestions, validateLesson } from 'services/api';
 import ReviewSession from 'components/reviewSession'
 import { LessonInterface } from 'interfaces/lessons';
 
-const ReviewLesson: React.FC = () => {
+const ReviewLesson: React.FC = ({ currentUser }) => {
 
     const obj: { programSlug: string, lessonSlug: string } = useParams();
     const lessonSlug = obj['lessonSlug'];
@@ -29,14 +31,28 @@ const ReviewLesson: React.FC = () => {
     })
 
     const onReviewIsOver = () => {
-        validateLesson(lesson.slug).then(() => {
+        storeAddLesson(lesson.slug);
+
+        if (currentUser) {
+            validateLesson(lesson.slug).then(() => {
+                present({
+                    message: "You have successfully validated this lesson!",
+                    buttons: [
+                        { text: "Continue", handler: () => history.replace("/page/explore") }
+                    ]
+                })
+            }).catch(() => { })
+        }
+        else {
+            // add the lesson review in a store, so that it's validated after registration
+            storeAddLesson(lesson.slug);
             present({
-                message: "You have successfully validated this lesson!",
+                message: "You have successfully validated this lesson! Now register to keep your changes.",
                 buttons: [
-                    { text: "Continue", handler: () => history.replace("/page/explore") }
+                    { text: "Register", handler: () => history.replace("/register") }
                 ]
             })
-        }).catch(() => { })
+        }
     }
 
     return (
@@ -52,4 +68,8 @@ const ReviewLesson: React.FC = () => {
     );
 }
 
-export default ReviewLesson;
+const MapStateToProps = (state: any) => ({
+    currentUser: state.auth.username
+})
+
+export default connect(MapStateToProps)(ReviewLesson);

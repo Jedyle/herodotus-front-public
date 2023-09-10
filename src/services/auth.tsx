@@ -28,12 +28,6 @@ let authApi = axios.create({
     }
 })
 
-async function postRegisterActions() {
-    // actions that must be made after registration
-    // 1. saving potential temporary data after an anonymous user logged in
-
-}
-
 // :poop: register is identical to login, because we don't need to confirm the email yet (so that registration is faster)
 async function register(email: string, username: string, password1: string, password2: string) {
     let registerPromise = authApi.post('/registration/', {

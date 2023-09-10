@@ -16,7 +16,6 @@ const Lesson: React.FC = () => {
     const [lesson, setLesson] = useState<LessonInterface | null>(null);
 
     useIonViewWillEnter(() => {
-        console.log("entering !!!!")
         retrieveLesson(programSlug, lessonSlug).then((response: any) => {
             setLesson(response.data)
         }).catch(() => { })

@@ -28,7 +28,6 @@ export const ADD_LESSON = "ADD_LESSON";
 export const RESET_LESSON = "RESET_LESSON";
 
 export const lessonReducer = (state: any = { lesson: null }, action: any) => {
-    console.log("in lesson red", state);
     switch (action.type) {
         case ADD_LESSON:
             return Object.assign({}, state, {
@@ -50,8 +49,6 @@ const rootReducer = combineReducers({
 
 export const store = createStore(rootReducer);
 
-/* export const store = createStore(authReducer); */
-
 // actions
 
 export function storeLogin(token: string, username: string) {
@@ -72,5 +69,11 @@ export function storeAddLesson(lesson: any) {
     store.dispatch({
         type: ADD_LESSON,
         lesson: lesson
+    })
+}
+
+export function storeResetLesson() {
+    store.dispatch({
+        type: RESET_LESSON
     })
 }

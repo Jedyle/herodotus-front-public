@@ -11,7 +11,6 @@ const PrivatePage: React.FC<any> = ({ render, ...props }) => {
     const [loginState, setLoginState] = useState({ loading: true, loggedIn: false });
 
     useIonViewWillEnter(() => {
-        console.log("hello state :", loginState)
         getAuthData().then((value) => {
             if (value && value.token !== null && value.username !== null) {
                 storeLogin(value.token, value.username);

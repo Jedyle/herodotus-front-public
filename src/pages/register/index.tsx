@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { useIonViewWillEnter, useIonViewDidLeave, IonLoading, IonPage, IonContent, IonRow, IonCol, IonGrid, IonItem, IonInput, IonLabel, IonButton, IonText } from '@ionic/react';
 
 import { register, getAuthData } from 'services/auth';
-import { storeLogin } from 'services/authStore';
+import { validateLesson } from 'services/api';
+import { storeLogin, storeResetLesson } from 'services/authStore';
 
 import './index.css';
 
@@ -14,7 +16,7 @@ interface Registration {
     password: string
 }
 
-const RegisterPage: React.FC = () => {
+const RegisterPage: React.FC = ({ lesson }) => {
 
     const history = useHistory();
 
@@ -54,8 +56,20 @@ const RegisterPage: React.FC = () => {
         setLoading(true);
         register(registration.email, registration.username, registration.password, registration.password).then(() => {
             // here, save information in tmp storage for first lesson
-            setLoading(false);
-            history.push("/");
+
+            if (lesson) {
+                // means the user that just registered completed a lesson before
+                validateLesson(lesson).catch((error: any) => { console.log(error) }).finally(() => {
+                    storeResetLesson();
+                    setLoading(false);
+                    history.push("/");
+                })
+            }
+            else {
+                setLoading(false);
+                history.push("/");
+            }
+
         }).catch(error => {
             if (error.response.status == 400) {
                 setErrors(error.response.data);
@@ -156,4 +170,8 @@ const RegisterPage: React.FC = () => {
     )
 }
 
-export default RegisterPage;
+const MapStateToProps = (state: any) => ({
+    lesson: state.lesson.lesson
+})
+
+export default connect(MapStateToProps)(RegisterPage);

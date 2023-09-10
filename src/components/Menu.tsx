@@ -13,7 +13,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation, useHistory } from 'react-router-dom';
-import { searchOutline, searchSharp, personOutline, personSharp, bookOutline, bookSharp, logOutOutline, logOutSharp, informationCircleOutline, informationCircleSharp, helpCircleSharp, helpCircleOutline } from 'ionicons/icons';
+import { searchOutline, searchSharp, personOutline, personSharp, bookOutline, bookSharp, logInOutline, logInSharp, logOutOutline, logOutSharp, informationCircleOutline, informationCircleSharp, helpCircleSharp, helpCircleOutline } from 'ionicons/icons';
 import './Menu.css';
 
 import { logout } from 'services/auth';
@@ -99,7 +99,13 @@ const Menu: React.FC<MenuProps> = ({ currentUser }) => {
                                 <IonIcon slot="start" ios={logOutOutline} md={logOutSharp} />
                                 <IonLabel>Logout</IonLabel>
                             </IonItem>
-                        </IonMenuToggle> : ""
+                        </IonMenuToggle> :
+                        <IonMenuToggle key="login" autoHide={false}>
+                            <IonItem className={location.pathname === "/login" ? 'selected' : ''} routerLink="/login" routerDirection="none" lines="none" detail={false}>
+                                <IonIcon slot="start" ios={logInOutline} md={logInSharp} />
+                                <IonLabel>Login</IonLabel>
+                            </IonItem>
+                        </IonMenuToggle>
                     }
                 </IonList>
             </IonContent>

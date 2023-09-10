@@ -8,6 +8,7 @@ import { useIonViewWillEnter, useIonViewDidLeave, IonPage, IonContent, IonRow, I
 
 import { login, getAuthData } from 'services/auth';
 import { storeLogin } from 'services/authStore';
+import Page from 'pages/Page';
 
 interface User {
     username: string,
@@ -66,8 +67,9 @@ const LoginPage: React.FC<LoginPageProps> = ({ currentUser }) => {
 
 
     return (
-        <IonPage>
-            <IonContent>
+        <Page
+            name="Login"
+            content={
                 <IonGrid>
                     <IonRow color="primary" justify-content-center>
                         <IonCol className="ion-align-self-center" size-md="6" size-lg="5" size-xs="12">
@@ -161,9 +163,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ currentUser }) => {
                         </IonCol>
                     </IonRow>
                 </IonGrid>
-            </IonContent>
-        </IonPage>
-    )
+            }
+        />)
 }
 
 const MapStateToProps = (state: any) => ({
